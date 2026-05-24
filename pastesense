@@ -1,0 +1,4096 @@
+-- variables for API (глобальные, не local — иначе превышается лимит 200 locals)
+ui_get, ui_new_slider = ui.get, ui.new_slider
+client_latency = client.latency
+client_log = client.log
+client_draw_rectangle = client.draw_rectangle
+client_draw_circle_outline = client.draw_circle_outline
+client_userid_to_entindex = client.userid_to_entindex
+client_draw_indicator = client.draw_indicator
+client_draw_gradient = client.draw_gradient
+client_set_event_callback = client.set_event_callback
+client_screen_size = client.screen_size
+client_eye_position = client.eye_position
+client_draw_circle = client.draw_circle
+client_color_log = client.color_log
+client_delay_call = client.delay_call
+client_draw_text = client.draw_text
+client_visible = client.visible
+client_exec = client.exec
+client_trace_line = client.trace_line
+client_set_cvar = client.set_cvar
+client_world_to_screen = client.world_to_screen
+client_draw_hitboxes = client.draw_hitboxes
+client_get_cvar = client.get_cvar
+client_draw_line = client.draw_line
+client_camera_angles = client.camera_angles
+client_draw_debug_text = client.draw_debug_text
+client_random_int = client.random_int
+client_random_float = client.random_float
+client_system_time = client.system_time
+client_open_panorama_context = client.open_panorama_context
+client_timestamp = client.timestamp
+client_set_clan_tag = client.set_clan_tag
+client_trace_bullet = client.trace_bullet
+
+plist_set = plist.set
+plist_get = plist.get
+
+entity_get_local_player = entity.get_local_player
+entity_is_enemy = entity.is_enemy
+entity_hitbox_position = entity.hitbox_position
+entity_get_player_name = entity.get_player_name
+entity_get_steam64 = entity.get_steam64
+entity_get_bounding_box = entity.get_bounding_box
+entity_get_all = entity.get_all
+entity_set_prop = entity.set_prop
+entity_is_alive = entity.is_alive
+entity_get_player_weapon = entity.get_player_weapon
+entity_get_prop = entity.get_prop
+entity_get_players = entity.get_players
+entity_get_classname = entity.get_classname
+entity_is_dormant = entity.is_dormant
+entity_get_game_rules = entity.get_game_rules
+
+globals_realtime = globals.realtime
+globals_absoluteframetime = globals.absoluteframetime
+globals_tickcount = globals.tickcount
+globals_curtime = globals.curtime
+globals_mapname = globals.mapname
+globals_tickinterval = globals.tickinterval
+globals_framecount = globals.framecount
+globals_frametime = globals.frametime
+globals_maxplayers = globals.maxplayers
+globals_lastoutgoingcommand = globals.lastoutgoingcommand
+
+ui_new_slider = ui.new_slider
+ui_new_combobox = ui.new_combobox
+ui_reference = ui.reference
+ui_set_visible = ui.set_visible
+ui_is_menu_open = ui.is_menu_open
+ui_new_color_picker = ui.new_color_picker
+ui_set_callback = ui.set_callback
+ui_set = ui.set
+ui_new_checkbox = ui.new_checkbox
+ui_new_hotkey = ui.new_hotkey
+ui_new_button = ui.new_button
+ui_new_multiselect = ui.new_multiselect
+ui_get = ui.get
+ui_new_textbox = ui.new_textbox
+
+math_ceil = math.ceil
+math_tan = math.tan
+math_cos = math.cos
+math_sin = math.sin
+math_pi = math.pi
+math_max = math.max
+math_min = math.min
+math_floor = math.floor
+math_sqrt = math.sqrt
+math_abs = math.abs
+math_rad = math.rad
+math_deg = math.deg
+math_atan = math.atan
+math_atan2 = math.atan2
+math_fmod = math.fmod
+math_acos = math.acos
+math_asin = math.asin
+math_pow = math.pow
+math_log = math.log
+math_exp = math.exp
+math_random = math.random
+math_randomseed = math.randomseed
+math_huge = math.huge
+math_sinh = math.sinh
+math_cosh = math.cosh
+math_tanh = math.tanh
+math_frexp = math.frexp
+math_ldexp = math.ldexp
+math_modf = math.modf
+math_log10 = math.log10
+
+table_sort = table.sort
+table_remove = table.remove
+table_insert = table.insert
+table_concat = table.concat
+table_maxn = table.maxn
+table_foreach = table.foreach
+table_foreachi = table.foreachi
+table_move = table.move
+table_getn = table.getn
+
+string_find = string.find
+string_format = string.format
+string_gsub = string.gsub
+string_len = string.len
+string_gmatch = string.gmatch
+string_match = string.match
+string_reverse = string.reverse
+string_upper = string.upper
+string_lower = string.lower
+string_sub = string.sub
+string_rep = string.rep
+string_dump = string.dump
+string_byte = string.byte
+string_char = string.char
+
+renderer_line = renderer.line
+renderer_indicator = renderer.indicator
+renderer_world_to_screen = renderer.world_to_screen
+renderer_circle_outline = renderer.circle_outline
+renderer_rectangle = renderer.rectangle
+renderer_gradient = renderer.gradient
+renderer_circle = renderer.circle
+renderer_text = renderer.text
+
+clipboard = require("gamesense/clipboard")
+
+
+clearcmd = "clear"
+
+ qw1ntoolslogo = {
+    logo = [[
+______         _       _____                     
+| ___ \       | |     /  ___|                    
+| |_/ /_ _ ___| |_ ___\ `--.  ___ _ __  ___  ___ 
+|  __/ _` / __| __/ _ \`--. \/ _ \ '_ \/ __|/ _ \
+| | | (_| \__ \ ||  __/\__/ /  __/ | | \__ \  __/
+\_|  \__,_|___/\__\___\____/ \___|_| |_|___/\___|.lua
+                                             v2.8
+                                                                                                                                          
+by Qw1n and Neverlose Bezumie // t.me/hvhboutique
+
+- added NFS Speedometer
+- added Mr robot ESP
+- added Combocounter
+ 
+* all features in LUA B tab
+* enjoy!
+
+     ]]
+}
+
+client.exec("clear")
+
+ui.new_label("LUA", "B", "=== [PasteSense] ===")
+ lines = {}
+for line in qw1ntoolslogo.logo:gmatch("[^\r\n]+") do
+    table.insert(lines, line)
+end
+
+for _, line in ipairs(lines) do
+    line = line:gsub('"', '\\"')
+    client.exec('echo "' .. line .. '"')
+end
+
+-- menu
+local menu_background = ui.new_checkbox("LUA", "B", "Menu background")
+ui.set(menu_background, true)
+
+snowflakes = snowflakes or {}
+snowflakes_count = 36 
+scr_w, scr_h = client.screen_size()
+menu_was_open = false
+
+function new_snowflake()
+    local flake = {
+        x0 = math.random() * scr_w,
+        y = math.random() * scr_h,
+        speed = 1.2 + math.random() * 1.5,
+        amp = 10 + math.random() * 14,
+        phase = math.random() * 6.28,
+        omega = 0.01 + math.random() * 0.017,
+        angle = 0,
+        size = 6 + math.random() * 4
+    }
+    flake.x = flake.x0 + math.sin(flake.phase) * flake.amp
+    return flake
+end
+
+function init_snowflakes()
+    snowflakes = {}
+    for i=1, snowflakes_count do
+        snowflakes[i] = new_snowflake()
+    end
+end
+
+function draw_snowflake(flake)
+    local x = flake.x
+    local y = flake.y
+    local a = flake.angle
+
+    renderer.circle(x, y, flake.size, 210, 230, 255, 180)
+    renderer.circle(x, y, flake.size * 0.45, 240, 250, 255, 230)
+    for theta = 0, 330, 60 do
+        local ang = a + math.rad(theta)
+        local x2 = x + math.cos(ang) * (flake.size * 1.05)
+        local y2 = y + math.sin(ang) * (flake.size * 1.05)
+        renderer.line(x, y, x2, y2, 220, 220, 255, 170)
+    end
+end
+
+init_snowflakes()
+
+client.set_event_callback("paint_ui", function()
+    if not ui.is_menu_open() then
+        if menu_was_open then
+            snowflakes = {}
+            menu_was_open = false
+        end
+        return
+    end
+
+    if not ui.get(menu_background) then
+        return
+    end
+
+    if not menu_was_open then
+        scr_w, scr_h = client.screen_size()
+        init_snowflakes()
+        menu_was_open = true
+    end
+
+    local w, h = client.screen_size()
+    if w ~= scr_w or h ~= scr_h then
+        scr_w = w
+        scr_h = h
+        init_snowflakes()
+    end
+
+    renderer.rectangle(0, 0, scr_w, scr_h, 0, 0, 0, 150)
+
+    local realtime = globals.realtime()
+    for i, flake in ipairs(snowflakes) do
+        flake.x = flake.x0 + math.sin(flake.phase + realtime * 1.12) * flake.amp
+        flake.angle = flake.angle + flake.omega
+        draw_snowflake(flake)
+        flake.y = flake.y + flake.speed
+
+        if (flake.y > scr_h + flake.size) then
+            flake.x0 = math.random() * scr_w
+            flake.y = -flake.size * 2
+            flake.speed = 1.2 + math.random() * 1.5
+            flake.phase = math.random() * 6.28
+            flake.amp = 10 + math.random() * 14
+            flake.angle = 0
+            flake.size = 6 + math.random() * 4
+            flake.omega = 0.01 + math.random() * 0.017
+        end
+    end
+end)
+-- menu
+
+-- firstperson on granade
+local fp_grenade_enable = ui.new_checkbox("LUA", "B", "First person on grenade")
+
+
+local third_person_ref = ui.reference("visuals", "effects", "force third person (alive)")
+
+local function is_grenade(item_index)
+    local grenades = { [43]=true, [44]=true, [45]=true, [46]=true, [47]=true, [48]=true }
+    return grenades[item_index] ~= nil
+end
+
+client.set_event_callback("paint", function()
+
+    if not ui.get(fp_grenade_enable) then return end
+
+    local me = entity.get_local_player()
+    if me == nil or not entity.is_alive(me) then return end
+
+    local weapon = entity.get_player_weapon(me)
+    if weapon == nil then return end
+
+    local item_index = entity.get_prop(weapon, "m_iItemDefinitionIndex")
+    
+    if is_grenade(item_index) then
+        ui.set(third_person_ref, false)
+    else
+        ui.set(third_person_ref, true) 
+    end
+end)
+-- firstperson on granade
+
+-- aspect ratio
+ function set_aspect_ratio(aspect_ratio_multiplier)
+	 screen_width, screen_height = client_screen_size()
+	 aspectratio_value = (screen_width*aspect_ratio_multiplier)/screen_height
+
+	if aspect_ratio_multiplier == 1 then
+		aspectratio_value = 0
+	end
+	client_set_cvar("r_aspectratio", tonumber(aspectratio_value))
+end
+
+ function gcd(m, n)
+	while m ~= 0 do
+		m, n = math_fmod(n, m), m;
+	end
+
+	return n
+end
+
+ aspect_ratio_table = {}
+
+ screen_width, screen_height = client_screen_size()
+for i=1, 200 do
+	 i2=i*0.01
+	i2 = 2 - i2
+	 divisor = gcd(screen_width*i2, screen_height)
+	if screen_width*i2/divisor < 100 or i2 == 1 then
+		aspect_ratio_table[i] = screen_width*i2/divisor .. ":" .. screen_height/divisor
+	end
+end
+
+ aspect_ratio_reference = ui.new_slider("LUA", "B", "Force aspect ratio", 1, 199, 100, true, "%", 1, aspect_ratio_table)
+
+ function on_aspect_ratio_changed()
+	 aspect_ratio = ui_get(aspect_ratio_reference)*0.01
+	aspect_ratio = 2 - aspect_ratio
+	set_aspect_ratio(aspect_ratio)
+end
+
+ui.set_callback(aspect_ratio_reference, on_aspect_ratio_changed)
+-- aspect ratio
+
+-- thirdpersond distance
+ui_get = ui.get
+ui_set = ui.set
+client_exec = client.exec
+ui_new_checkbox = ui.new_checkbox
+ui_new_slider = ui.new_slider
+ui_set_callback = ui.set_callback
+
+tpdistanceslider = ui_new_slider("LUA", "B", "Thirdperson Distance", 30, 200, 150)
+
+function tpdistance()
+	client_exec("cam_idealdist ", ui_get(tpdistanceslider))
+end
+ui_set_callback(tpdistanceslider, tpdistance)
+-- thirdperson distance
+
+-- pixel esp
+surface_px = require("gamesense/surface")
+
+ref_names_px = ui.reference("VISUALS", "Player ESP", "Name")
+ref_weaponicon_px = ui.reference("VISUALS", "Player ESP", "Weapon icon")
+ref_weapons_px = ui.reference("VISUALS", "Player ESP", "Weapon text")
+ref_flags_px = ui.reference("VISUALS", "Player ESP", "Flags")
+ref_healthbar_px = ui.reference("VISUALS", "Player ESP", "Health bar")
+
+custom_esp_enabled_px = ui.new_checkbox("LUA", "B", "Pixel ESP")
+esp_color_px = ui.new_color_picker("LUA", "B", "ESP Color", 255, 255, 255, 255)
+static_hp_enabled_px = ui.new_checkbox("LUA", "B", "Static HP bar Color")
+static_hp_color_px = ui.new_color_picker("LUA", "B", "Static HP Color Picker", 255, 255, 255, 255)
+
+pixel_font_px = surface_px.create_font("Verdana", 12, 400, {0x200})
+
+weapon_names_custom_px = {
+    ["HKP2000"] = "p2000", ["SCAR20"] = "scar20", ["SG553"] = "sg553",
+    ["GLOCK"] = "glock 18", ["KNIFE"] = "knife", ["SMOKEGRANADE"] = "smoke",
+    ["DEAGLE"] = "deagle", ["ELITE"] = "dualies", ["FIVESEVEN"] = "five-seven",
+    ["TEC9"] = "tec-9", ["REVOLVER"] = "r8 revolver", ["AK47"] = "ak-47",
+    ["AUG"] = "aug", ["FAMAS"] = "famas", ["G3SG1"] = "g3sg1",
+    ["GALILAR"] = "galil ar", ["M4A1"] = "m4a4", ["M4A1_SILENCER"] = "m4a1-s",
+    ["AWP"] = "awp", ["SSG08"] = "ssg 08", ["MAC10"] = "mac-10",
+    ["MP5SD"] = "mp5-sd", ["MP7"] = "mp7", ["MP9"] = "mp9",
+    ["P90"] = "p90", ["BIZON"] = "bizon", ["UMP45"] = "ump-45",
+    ["MAG7"] = "mag-7", ["NOVA"] = "nova", ["SAWEDOFF"] = "sawed-off",
+    ["XM1014"] = "xm1014", ["M249"] = "m249", ["NEGEV"] = "negev",
+    ["FLASHBANG"] = "flash", ["HEGRENADE"] = "HE", ["MOLOTOV"] = "molotov",
+    ["INCGRENADE"] = "incendiary", ["C4"] = "c4 bomb", ["TASER"] = "zeus"
+}
+
+local function set_standard_esp(state)
+    ui.set(ref_names_px, state)
+    ui.set(ref_weapons_px, state)
+    ui.set(ref_flags_px, state)
+    ui.set(ref_healthbar_px, state)
+end
+
+function handle_menu_px()
+    main_enabled_px = ui.get(custom_esp_enabled_px)
+    ui.set_visible(static_hp_enabled_px, main_enabled_px)
+    ui.set_visible(static_hp_color_px, main_enabled_px)
+    if not main_enabled_px then set_standard_esp(true) end
+end
+ui.set_callback(custom_esp_enabled_px, handle_menu_px)
+
+client.set_event_callback("paint", function()
+    enabled_px = ui.get(custom_esp_enabled_px)
+    
+    if not enabled_px then 
+        return 
+    end
+
+    set_standard_esp(false)
+
+    local local_player = entity.get_local_player()
+    local players_px = entity.get_players() 
+    
+    r_px, g_px, b_px, a_menu_px = ui.get(esp_color_px)
+    static_enabled_px = ui.get(static_hp_enabled_px)
+    sr_px, sg_px, sb_px, _ = ui.get(static_hp_color_px)
+    icons_on_px = ui.get(ref_weaponicon_px)
+
+    for i=1, #players_px do
+        p_px = players_px[i]
+
+        if not entity.is_dormant(p_px) and entity.is_alive(p_px) and p_px ~= local_player then
+            x1_px, y1_px, x2_px, y2_px, alpha_esp_px = entity.get_bounding_box(p_px)
+            
+            if x1_px ~= nil and alpha_esp_px > 0 then
+                final_a_px = a_menu_px * alpha_esp_px
+                bar_h_px = y2_px - y1_px
+                name_px = entity.get_player_name(p_px)
+                w_n_px, _ = surface_px.get_text_size(pixel_font_px, name_px)
+                surface_px.draw_text(x1_px + (x2_px - x1_px)/2 - (w_n_px/2), y1_px - 15, r_px, g_px, b_px, final_a_px, pixel_font_px, name_px)
+
+                weapon_ent_px = entity.get_player_weapon(p_px)
+                if weapon_ent_px ~= nil then
+                    weapon_raw_px = entity.get_classname(weapon_ent_px)
+                    if weapon_raw_px then
+                        w_name_px = weapon_raw_px:gsub("C", "", 1):gsub("Weapon", ""):upper()
+                        w_name_px = weapon_names_custom_px[w_name_px] or w_name_px:lower()
+                        
+                        w_w_px, _ = surface_px.get_text_size(pixel_font_px, w_name_px)
+                        y_offset_px = icons_on_px and 18 or 6
+                        surface_px.draw_text(x1_px + (x2_px - x1_px)/2 - (w_w_px/2), y2_px + y_offset_px, r_px, g_px, b_px, final_a_px, pixel_font_px, w_name_px)
+                    end
+                end
+
+                flags_px = {}
+                armor_px = entity.get_prop(p_px, "m_ArmorValue") or 0
+                if armor_px > 0 then
+                    helm_px = entity.get_prop(p_px, "m_bHasHelmet") == 1
+                    table.insert(flags_px, helm_px and "hk" or "k")
+                end
+                if entity.get_prop(p_px, "m_bIsScoped") == 1 then table.insert(flags_px, "scoped") end
+                
+                for f=1, #flags_px do
+                    surface_px.draw_text(x2_px + 6, y1_px + (f-1)*10, r_px, g_px, b_px, final_a_px, pixel_font_px, flags_px[f])
+                end
+
+                health_px = entity.get_prop(p_px, "m_iHealth") or 0
+                if health_px > 0 then
+                    hp_p_px = math.min(1, health_px / 100)
+                    cur_h_px = bar_h_px * hp_p_px
+                    bx_px = x1_px - 6
+                    
+                    surface_px.draw_filled_rect(bx_px - 1, y1_px - 1, 4, bar_h_px + 2, 0, 0, 0, final_a_px * 0.6)
+
+                    if static_enabled_px then
+                        rr_px, rg_px, rb_px = sr_px, sg_px, sb_px
+                    else
+                        rr_px, rg_px, rb_px = math.min(255, 510 * (1 - hp_p_px)), math.min(255, 510 * hp_p_px), 0
+                    end
+                    
+                    surface_px.draw_filled_rect(bx_px, y2_px - cur_h_px, 2, cur_h_px, rr_px, rg_px, rb_px, final_a_px)
+                    
+                    if health_px < 100 then
+                        hp_txt_px = tostring(health_px)
+                        tw_px, th_px = surface_px.get_text_size(pixel_font_px, hp_txt_px)
+                        surface_px.draw_text(bx_px - tw_px + 1, y2_px - cur_h_px - (th_px/2) + 1, 255, 255, 255, final_a_px, pixel_font_px, hp_txt_px)
+                    end
+                end
+            end
+        end
+    end
+end)
+
+client.set_event_callback("shutdown", function()
+    set_standard_esp(true)
+end)
+
+
+-- pixel esp
+
+-- bullettracer
+-- Menu
+tracer = ui.new_checkbox("LUA", "B", "Bullet tracers")
+color_picker = ui.new_color_picker("LUA", "B", "Tracer color", 255, 255, 255, 255)
+duration_slider = ui.new_slider("LUA", "B", "Tracer duration", 1, 100, 15, true, "s", 0.1)
+thickness_slider = ui.new_slider("LUA", "B", "Tracer thickness", 1, 5, 2)
+
+queue = {}
+last_eye_pos = {0, 0, 0}
+last_tick = 0
+
+handle_menu = function()
+    state = ui.get(tracer)
+    ui.set_visible(color_picker, state)
+    ui.set_visible(duration_slider, state)
+    ui.set_visible(thickness_slider, state)
+end
+
+handle_menu()
+ui.set_callback(tracer, handle_menu)
+
+client.set_event_callback("weapon_fire", function(e)
+    if client.userid_to_entindex(e.userid) == entity.get_local_player() then
+        last_eye_pos = {client.eye_position()}
+    end
+end)
+
+client.set_event_callback("bullet_impact", function(e)
+    if not ui.get(tracer) then return end
+    
+    me = entity.get_local_player()
+    if client.userid_to_entindex(e.userid) ~= me then return end
+    
+    cur_tick = globals.tickcount()
+    duration = ui.get(duration_slider) * 0.1
+    
+    if cur_tick == last_tick and #queue > 0 then
+        queue[#queue].x2 = e.x
+        queue[#queue].y2 = e.y
+        queue[#queue].z2 = e.z
+    else
+        table.insert(queue, {
+            x1 = last_eye_pos[1], y1 = last_eye_pos[2], z1 = last_eye_pos[3],
+            x2 = e.x, y2 = e.y, z2 = e.z,
+            start_time = globals.curtime(),
+            end_time = globals.curtime() + duration
+        })
+    end
+    
+    last_tick = cur_tick
+end)
+
+client.set_event_callback("paint", function()
+    if not ui.get(tracer) then return end
+    
+    curtime = globals.curtime()
+    r, g, b, a = ui.get(color_picker)
+    thickness = ui.get(thickness_slider)
+    s = 3 
+
+    for i = #queue, 1, -1 do
+        data = queue[i]
+        
+        if curtime > data.end_time then
+            table.remove(queue, i)
+        else
+            alpha_factor = (data.end_time - curtime) / (data.end_time - data.start_time)
+            cur_a = a * alpha_factor
+            
+            x1, y1 = renderer.world_to_screen(data.x1, data.y1, data.z1)
+            x2, y2 = renderer.world_to_screen(data.x2, data.y2, data.z2)
+            
+            if x1 and x2 then
+                for offset = 0, thickness - 1 do
+                    renderer.line(x1 + offset, y1, x2 + offset, y2, r, g, b, cur_a)
+                end
+
+                for offset = 0, math.max(0, thickness - 2) do
+                    renderer.line(x2 - s + offset, y2 - s, x2 + s + offset, y2 + s, r, g, b, cur_a)
+                    renderer.line(x2 - s + offset, y2 + s, x2 + s + offset, y2 - s, r, g, b, cur_a)
+                end
+            end
+        end
+    end
+end)
+
+client.set_event_callback("round_prestart", function()
+    queue = {}
+end)
+-- bullettracer
+
+--viewmodel changer
+
+ cvar_fov      = cvar.viewmodel_fov
+ cvar_offset_x = cvar.viewmodel_offset_x
+ cvar_offset_y = cvar.viewmodel_offset_y     
+ cvar_offset_z = cvar.viewmodel_offset_z
+
+ default_fov       = 680
+ default_offset_x  = 25 
+ default_offset_y  = 0
+ default_offset_z  = -15
+
+ function set_viewmodel(fov, x, y, z)
+    cvar_fov:set_raw_float(fov * 0.1)
+    cvar_offset_x:set_raw_float(x * 0.1)
+    cvar_offset_y:set_raw_float(y * 0.1)
+    cvar_offset_z:set_raw_float(z * 0.1)
+end
+
+ viewmodel_changer     = ui_new_checkbox("LUA", "B", "Viewmodel changer")
+ viewmodel_fov         = ui_new_slider("LUA", "B", "Offset fov", -1800, 1800, default_fov, true, nil, 0.1)
+ viewmodel_offset_x    = ui_new_slider("LUA", "B", "Offset x", -1800, 1800, default_offset_x, true, nil, 0.1)
+ viewmodel_offset_y    = ui_new_slider("LUA", "B", "Offset y", -1800, 1800, default_offset_y, true, nil, 0.1)
+ viewmodel_offset_z    = ui_new_slider("LUA", "B", "Offset z", -1800, 1800, default_offset_z, true, nil, 0.1)
+
+ function handle_viewmodel()
+     client_exec("cl_bob_lower_amt 5")
+     offset_fov    = ui_get(viewmodel_fov)
+     offset_x      = ui_get(viewmodel_offset_x)
+     offset_y      = ui_get(viewmodel_offset_y)
+     offset_z      = ui_get(viewmodel_offset_z)
+    set_viewmodel(offset_fov, offset_x, offset_y, offset_z)
+end
+
+ui_set_callback(viewmodel_fov, handle_viewmodel)
+ui_set_callback(viewmodel_offset_x, handle_viewmodel)
+ui_set_callback(viewmodel_offset_y, handle_viewmodel)
+ui_set_callback(viewmodel_offset_z, handle_viewmodel)
+
+ function handle_menu()
+     state = ui_get(viewmodel_changer)
+    ui_set_visible(viewmodel_fov, state)
+    ui_set_visible(viewmodel_offset_x, state)
+    ui_set_visible(viewmodel_offset_y, state)
+    ui_set_visible(viewmodel_offset_z, state)
+    if not state then
+        set_viewmodel(default_fov, default_offset_x, default_offset_y, default_offset_z)
+    else
+        handle_viewmodel()
+    end
+end
+
+handle_menu()
+ui_set_callback(viewmodel_changer, handle_menu)
+
+ function shutdown()
+    client_exec("cl_bob_lower_amt 21")
+    set_viewmodel(default_fov, default_offset_x, default_offset_y, default_offset_z)
+end
+
+client_set_event_callback("shutdown", shutdown)
+-- viewmodel changer
+
+-- autobuy
+ primary_weapons = {{name='-', command=""}, {name='AWP', command="buy awp; "}, {name='Auto-Sniper', command="buy scar20; buy g3sg1; "}, {name='Scout', command="buy ssg08; "}, {name='Shotgun', command="buy mag7; buy sawedoff "}}
+secondary_weapons = {{name='-', command=""}, {name='R8 Revolver / Deagle', command="buy deagle; "}, {name='Dual Berettas', command="buy elite; "}, {name='FN57 / Tec9 / CZ75-Auto', command="buy fn57; "}}
+gear_weapons = {{name='Kevlar', command="buy vest; "}, {name='Helmet', command="buy vesthelm; "}, {name='Defuse Kit', command="buy defuser; "}, {name='Grenade', command="buy hegrenade; "}, {name='Molotov', command="buy incgrenade; "}, {name='Smoke', command="buy smokegrenade; "}, {name='Flashbang (x2)', command="buy flashbang; "}, {name='Taser', command="buy taser; "}}
+
+function get_names(tbl)
+    local n = {}
+    for i=1, #tbl do table.insert(n, tbl[i].name) end
+    return n
+end
+
+function get_command(tbl, name)
+    for i=1, #tbl do if tbl[i].name == name then return tbl[i].command end end
+    return ""
+end
+
+buybot_enabled = ui.new_checkbox("LUA", "B", "Auto-Buy")
+buybot_primary = ui.new_combobox("LUA", "B", "Auto-Buy: Primary", get_names(primary_weapons))
+buybot_pistol = ui.new_combobox("LUA", "B", "Auto-Buy: Secondary", get_names(secondary_weapons))
+buybot_gear = ui.new_multiselect("LUA", "B", "Auto-Buy: Gear", get_names(gear_weapons))
+
+ui.set_callback(buybot_enabled, function()
+    local s = ui.get(buybot_enabled)
+    ui.set_visible(buybot_primary, s)
+    ui.set_visible(buybot_pistol, s)
+    ui.set_visible(buybot_gear, s)
+end)
+
+client.set_event_callback("player_spawn", function(e)
+    if not ui.get(buybot_enabled) or client.userid_to_entindex(e.userid) ~= entity.get_local_player() then return end
+    local cmds = {get_command(primary_weapons, ui.get(buybot_primary)), get_command(secondary_weapons, ui.get(buybot_pistol))}
+    local gear = ui.get(buybot_gear)
+    for i=1, #gear do table.insert(cmds, get_command(gear_weapons, gear[i])) end
+    table.insert(cmds, "use weapon_knife;")
+    client.exec(table.concat(cmds, ""))
+end)
+-- autobuy
+
+-- hitmarker 3D
+
+local success, surface = pcall(require, 'gamesense/surface')
+
+if not success then
+    error('\n\n - Surface library is required \n - https://gamesense.pub/forums/viewtopic.php?id=18793\n')
+end
+
+local shot_data = {}
+local hit_marker = ui_new_checkbox("LUA", "B", "Hit marker 3D")
+local hit_marker_color = ui_new_color_picker("LUA", "B", "Hit marker color", 255, 255, 255, 255)
+
+-- В функции paint() ищем отрисовку линий и меняем цвет
+local function paint()
+    if not ui_get(hit_marker) then
+        return
+    end
+
+    -- Получаем значения из колорпикера
+    local r, g, b, a = ui_get(hit_marker_color)
+    local size = 2.5
+    local size2 = 2.5
+
+    for tick, data in pairs(shot_data) do
+        if data.draw then
+            if globals_curtime() >= data.time then
+                data.alpha = data.alpha - 2
+            end
+
+            if data.alpha <= 0 then
+                data.alpha = 0
+                data.draw = false
+            end
+
+            local sx, sy = renderer_world_to_screen(data.x, data.y, data.z)
+            if sx ~= nil then
+                -- Высчитываем итоговую прозрачность (учитываем альфу из пикера и затухание)
+                local current_alpha = math.min(a, data.alpha)
+                local shadow_alpha = math.max(0, current_alpha - 35)
+
+                -- Отрисовка линий с выбранным цветом
+                -- Тень (черная обводка)
+                renderer_line(sx + size, sy + size, sx + (size * size2), sy + (size * size2), 0, 0, 0, current_alpha)
+                -- Основная линия (твой цвет)
+                renderer_line(sx + size, sy + size, sx + (size * size2), sy + (size * size2), r, g, b, shadow_alpha)
+
+                renderer_line(sx - size, sy + size, sx - (size * size2), sy + (size * size2), 0, 0, 0, current_alpha)
+                renderer_line(sx - size, sy + size, sx - (size * size2), sy + (size * size2), r, g, b, shadow_alpha)
+
+                renderer_line(sx + size, sy - size, sx + (size * size2), sy - (size * size2), 0, 0, 0, current_alpha)
+                renderer_line(sx + size, sy - size, sx + (size * size2), sy - (size * size2), r, g, b, shadow_alpha)
+
+                renderer_line(sx - size, sy - size, sx - (size * size2), sy - (size * size2), 0, 0, 0, current_alpha)
+                renderer_line(sx - size, sy - size, sx - (size * size2), sy - (size * size2), r, g, b, shadow_alpha)
+            end
+        end
+    end
+end
+
+local function player_hurt(e)
+    if not ui_get(hit_marker) then
+        return
+    end
+
+    local victim_entindex = client_userid_to_entindex(e.userid)
+    local attacker_entindex = client_userid_to_entindex(e.attacker)
+
+    if attacker_entindex ~= entity_get_local_player() then
+        return
+    end
+
+    local tick = globals_tickcount()
+    local data = shot_data[tick]
+
+    if shot_data[tick] == nil or data.impacts == nil then
+        return
+    end
+
+    local hitgroups = { 
+        [1] = {0, 1}, 
+        [2] = {4, 5, 6}, 
+        [3] = {2, 3}, 
+        [4] = {13, 15, 16}, 
+        [5] = {14, 17, 18}, 
+        [6] = {7, 9, 11}, 
+        [7] = {8, 10, 12}
+    }
+
+    local impacts = data.impacts
+    local hitboxes = hitgroups[e.hitgroup]
+    
+    local hit = nil
+    local closest = math.huge
+
+    for i=1, #impacts do
+        local impact = impacts[i]
+
+        if hitboxes ~= nil then
+            for j=1, #hitboxes do
+                local x, y, z = entity_hitbox_position(victim_entindex, hitboxes[j])
+                local distance = math_sqrt((impact.x - x)^2 + (impact.y - y)^2 + (impact.z - z)^2)
+
+                if distance < closest then
+                    hit = impact
+                    closest = distance
+                end
+            end
+        end
+    end
+
+    if hit == nil then
+        return
+    end
+
+    shot_data[tick] = {
+        x = hit.x,
+        y = hit.y,
+        z = hit.z,
+        time = globals_curtime() + 1 - 0.25,
+        alpha = 255,
+        damage = e.dmg_health,
+        hs = e.hitgroup == 0 or e.hitgroup == 1,
+        draw = true,
+    }
+end
+
+local function bullet_impact(e)
+    if not ui_get(hit_marker) then
+        return
+    end
+
+    if client_userid_to_entindex(e.userid) ~= entity_get_local_player() then
+        return
+    end
+
+    local tick = globals_tickcount()
+
+    if shot_data[tick] == nil then
+        shot_data[tick] = {
+            impacts = { }
+        }
+    end
+
+    local impacts = shot_data[tick].impacts
+
+    if impacts == nil then
+        impacts = { }
+    end
+
+    impacts[#impacts + 1] = {
+        x = e.x,
+        y = e.y,
+        z = e.z
+    }
+end
+
+local function round_start()
+    if not ui_get(hit_marker) then
+        return
+    end
+
+    shot_data = { }
+end
+
+client.set_event_callback("paint", paint)
+client.set_event_callback("player_hurt", player_hurt)
+client.set_event_callback("round_start", round_start)
+client.set_event_callback("bullet_impact", bullet_impact)
+-- hitmarker 3D
+
+-- damage indicator
+
+local surface = require 'gamesense/surface'
+local damage_font = surface.create_font('Small Fonts', 12, 800, { 0x010, 0x080 })
+
+local enabled_reference = ui.new_checkbox("LUA", "B", "Damage Indicator")
+local color_reference = ui.new_color_picker("LUA", "B", "Indicator Color", 255, 255, 255, 255)
+
+local STATIC_DURATION = 2 
+local STATIC_SPEED = 4
+
+local damage_indicator_displays = {}
+
+local function on_player_hurt(e)
+    if not ui_get(enabled_reference) then return end
+    
+    local attacker = client.userid_to_entindex(e.attacker)
+    local local_player = entity.get_local_player()
+    
+    if attacker ~= local_player then return end
+
+    local userid, damage = e.userid, e.dmg_health
+    if userid == nil or damage == nil then return end
+
+    local player = client.userid_to_entindex(userid)
+    if player == 0 then return end
+    
+    local x, y, z = entity_get_prop(player, "m_vecOrigin")
+    if x == nil then return end
+    
+    local voZ = entity_get_prop(player, "m_vecViewOffset[2]") or 64
+    
+    damage_indicator_displays[player] = {damage, globals_realtime(), x, y, z + voZ + 25}
+end
+
+local function on_paint(ctx)
+    if not ui_get(enabled_reference) then return end
+
+    local realtime = globals_realtime()
+    local r, g, b, picker_a = ui_get(color_reference)
+
+    for player, data in pairs(damage_indicator_displays) do
+        local damage, time, x, y, z = data[1], data[2], data[3], data[4], data[5]
+        
+        if realtime - time < STATIC_DURATION then
+            local sx, sy = client_world_to_screen(ctx, x, y, z)
+            if sx ~= nil then
+                local alpha_fade = 1.0
+                local time_diff = realtime - time
+                
+                if time_diff > (STATIC_DURATION * 0.7) then
+                    alpha_fade = 1 - ((time_diff - (STATIC_DURATION * 0.7)) / (STATIC_DURATION * 0.3))
+                end
+
+                local text = tostring(damage)
+                local w, h = surface.get_text_size(damage_font, text)
+                surface.draw_text(sx - w/2, sy, r, g, b, picker_a * alpha_fade, damage_font, text)
+            end
+
+            data[5] = z + (STATIC_SPEED * 0.1)
+        else
+            damage_indicator_displays[player] = nil
+        end
+    end
+end
+
+ui.set_callback(enabled_reference, function()
+    local enabled = ui_get(enabled_reference)
+    ui_set_visible(color_reference, enabled)
+end)
+
+client.set_event_callback("player_hurt", on_player_hurt)
+client.set_event_callback("paint", on_paint)
+
+-- damage indicator
+
+-- wireframe on hit
+local time = 10
+local r_h, g_h, b_h, a_h = 255, 0, 0, 255
+local r_m, g_m, b_m, a_m = 255, 255, 255, 10
+
+local hitgroup_data = {
+    {0}, --head/neck
+    {6, 5}, --chest
+    {2, 3, 4}, --stomach/pelvis
+    {15, 16}, --left arm
+    {17, 18}, --right arm
+    {7, 9, 11}, --left leg
+    {8, 10, 12}, --right leg
+    {1}, --neck
+}
+
+local ui_enabled = ui.new_checkbox("LUA", "B", "Detailed wireframe hit")
+local ui_color_hit = ui.new_color_picker("LUA", "B", "Detailed wireframe hit", 255, 0, 0, 255)
+local ui_color_miss = ui.new_color_picker("LUA", "B", "Detailed wireframe miss", 255, 255, 255, 10)
+local ui_time = ui.new_slider("LUA", "B", "Detailed wireframe time", 5, 300, 10, true, "s", 0.1)
+
+local function draw_hitgroup(entidx, hitgroup, tick)
+    local hitboxes = hitgroup
+    if hitgroup < 1 or hitgroup > 8 then 
+        client.draw_hitboxes(entidx, time, 19, r_h, g_h, b_h, a_h, tick)
+    else
+        for i = 1, #hitgroup_data do 
+            local r, g, b, a = r_m, g_m, b_m, a_m
+            if hitgroup == i then 
+                r, g, b, a = r_h, g_h, b_h, a_h
+            end
+            if a ~= 0 then 
+                for n = 1, #hitgroup_data[i] do 
+                    client.draw_hitboxes(entidx, time, hitgroup_data[i][n], r, g, b, a, tick)
+                end
+            end
+        end
+    end
+end
+
+local function hurt_handler(event)
+    local attacker_entindex = client.userid_to_entindex(event.attacker)
+    local local_player = entity.get_local_player()
+    
+    if attacker_entindex ~= local_player then 
+        return 
+    end
+
+    local victim_entindex = client.userid_to_entindex(event.userid)
+    if victim_entindex ~= nil then
+        draw_hitgroup(victim_entindex, event.hitgroup, globals.tickcount())
+    end
+end
+
+do  
+    ui.set_callback(ui_enabled, function()
+        local state = ui.get(ui_enabled)
+
+        local update_callback = state and client.set_event_callback or client.unset_event_callback
+        update_callback("player_hurt", hurt_handler)
+
+        ui.set_visible(ui_color_hit, state)
+        ui.set_visible(ui_color_miss, state)
+        ui.set_visible(ui_time, state)
+    end)
+
+    local state = ui.get(ui_enabled)
+
+    local update_callback = state and client.set_event_callback or client.unset_event_callback
+    update_callback("player_hurt", hurt_handler)
+
+    ui.set_visible(ui_color_hit, state)
+    ui.set_visible(ui_color_miss, state)
+    ui.set_visible(ui_time, state)
+
+    ui.set_callback(ui_color_hit, function()
+        r_h, g_h, b_h, a_h = ui.get(ui_color_hit)
+    end)
+    r_h, g_h, b_h, a_h = ui.get(ui_color_hit)
+
+    ui.set_callback(ui_color_miss, function()
+        r_m, g_m, b_m, a_m = ui.get(ui_color_miss)
+    end)
+    r_m, g_m, b_m, a_m = ui.get(ui_color_miss)
+
+    ui.set_callback(ui_time, function()
+        time = ui.get(ui_time)*0.1
+    end)
+    time = ui.get(ui_time)*0.1
+end
+-- wireframe on hit
+-- scope overlay
+local clamp = function(v, min, max) local num = v; num = num < min and min or num; num = num > max and max or num; return num end
+
+local easing = require "gamesense/easing"
+local m_alpha = 0
+
+local scope_overlay = ui_reference('VISUALS', 'Effects', 'Remove scope overlay')
+local postprocessing = ui_reference('VISUALS', 'Effects', 'Disable post processing')
+
+local master_switch = ui_new_checkbox('LUA', 'B', 'Custom scope lines')
+-- Твой новый чекбокс
+local postprocess_checkbox = ui_new_checkbox('LUA', 'B', 'Disable post processing on scope')
+
+local color_picker = ui_new_color_picker('LUA', 'B', '\n scope_lines_color_picker', 0, 0, 0, 255)
+local overlay_position = ui_new_slider('LUA', 'B', '\n scope_lines_initial_pos', 0, 500, 190)
+local overlay_offset = ui_new_slider('LUA', 'B', '\n scope_lines_offset', 0, 500, 15)
+local fade_time = ui_new_slider('LUA', 'B', 'Fade animation speed', 3, 20, 12, true, 'fr', 1, { [3] = 'Off' })
+
+local g_paint_ui = function()
+    ui_set(scope_overlay, true)
+end
+
+local g_paint = function()
+    ui_set(scope_overlay, false)
+
+    local width, height = client_screen_size()
+    local offset, initial_position, speed, color =
+        ui_get(overlay_offset) * height / 1080, 
+        ui_get(overlay_position) * height / 1080, 
+        ui_get(fade_time), { ui_get(color_picker) }
+
+    local me = entity_get_local_player()
+    local wpn = entity_get_player_weapon(me)
+
+    local scope_level = entity_get_prop(wpn, 'm_zoomLevel')
+    local scoped = entity_get_prop(me, 'm_bIsScoped') == 1
+    local resume_zoom = entity_get_prop(me, 'm_bResumeZoom') == 1
+
+    local is_valid = entity_is_alive(me) and wpn ~= nil and scope_level ~= nil
+    local act = is_valid and scope_level > 0 and scoped and not resume_zoom
+
+    if ui_get(postprocess_checkbox) then
+        if act then
+            ui_set(postprocessing, true)
+        else
+            ui_set(postprocessing, false)
+        end
+    end
+
+    local FT = speed > 3 and globals_frametime() * speed or 1
+    local alpha = easing.linear(m_alpha, 0, 1, 1)
+
+    renderer_gradient(width/2 - initial_position + 2, height / 2, initial_position - offset, 1, color[1], color[2], color[3], 0, color[1], color[2], color[3], alpha*color[4], true)
+    renderer_gradient(width/2 + offset, height / 2, initial_position - offset, 1, color[1], color[2], color[3], alpha*color[4], color[1], color[2], color[3], 0, true)
+
+    renderer_gradient(width / 2, height/2 - initial_position + 2, 1, initial_position - offset, color[1], color[2], color[3], 0, color[1], color[2], color[3], alpha*color[4], false)
+    renderer_gradient(width / 2, height/2 + offset, 1, initial_position - offset, color[1], color[2], color[3], alpha*color[4], color[1], color[2], color[3], 0, false)
+    
+    m_alpha = clamp(m_alpha + (act and FT or -FT), 0, 1)
+end
+
+local ui_callback = function(c)
+    local is_active, addr = ui_get(master_switch), ''
+
+    if not is_active then
+        m_alpha, addr = 0, 'un'
+        ui_set(postprocessing, false)
+    end
+    
+    local _func = client[addr .. 'set_event_callback']
+
+    ui_set_visible(scope_overlay, not is_active)
+    ui_set_visible(postprocess_checkbox, is_active)
+    ui_set_visible(overlay_position, is_active)
+    ui_set_visible(overlay_offset, is_active)
+    ui_set_visible(fade_time, is_active)
+
+    _func('paint_ui', g_paint_ui)
+    _func('paint', g_paint)
+end
+
+ui_set_callback(master_switch, ui_callback)
+ui_callback(master_switch)
+
+
+-- scope overlay
+
+-- granade esp
+
+local grenade_timer_reference = ui.new_multiselect("LUA", "B", "Grenades: Timer ", "Text", "Bar")
+local smoke_radius_reference = ui.new_checkbox("LUA", "B", "Grenades: Smoke radius")
+local smoke_radius_color_reference = ui.new_color_picker("LUA", "B", "Grenades: Smoke radius", 61, 147, 250, 180)
+local molotov_radius_reference = ui.new_checkbox("LUA", "B", "Grenades: Molotov radius")
+local molotov_radius_color_reference = ui.new_color_picker("LUA", "B", "Grenades: Molotov radius", 255, 63, 63, 190)
+local molotov_team_reference = ui.new_checkbox("LUA", "B", "Grenades: Molotov team")
+local legacy_timer_reference = ui.new_checkbox("LUA", "B", "Grenades: Timer")
+local function on_legacy_timer_changed()
+    if ui_get(legacy_timer_reference) and #ui_get(grenade_timer_reference) == 0 then
+        ui_set(grenade_timer_reference, {"Text"})
+        ui_set(legacy_timer_reference, false)
+    end
+end
+ui.set_callback(legacy_timer_reference, on_legacy_timer_changed)
+ui.set_visible(legacy_timer_reference, false)
+
+local smoke_radius_units = 125
+local smoke_duration = 17.55
+local molotov_duration = 7
+local MOVETYPE_NOCLIP = 8
+local bar_width = 26
+
+local molotovs = {}
+local molotovs_temp = {}
+local molotovs_created_at = {}
+local molotovs_cells = {}
+
+local class_names = {
+    ["CSmokeGrenadeProjectile"] = "SMOKE",
+    ["CMolotovProjectile"] = "MOLOTOV",
+    ["CBaseCSGrenadeProjectile"] = "HE GRENADE",
+    ["CInferno"] = "MOLLY",
+}
+local function contains(tbl, val)
+    for i=1,#tbl do if tbl[i] == val then return true end end
+    return false
+end
+
+local function is_player(entindex)
+    return entity_get_classname(entindex) == "CCSPlayer"
+end
+
+local function lerp_pos(x1, y1, z1, x2, y2, z2, percentage)
+    local x = (x2 - x1) * percentage + x1
+    local y = (y2 - y1) * percentage + y1
+    local z = (z2 - z1) * percentage + z1
+    return x, y, z
+end
+
+local function distance(x1, y1, x2, y2)
+    return math_sqrt((x2-x1)^2 + (y2-y1)^2)
+end
+
+local function distance3d(x1, y1, z1, x2, y2, z2)
+    return math_sqrt((x2-x1)^2 + (y2-y1)^2 + (z2-z1)^2)
+end
+
+local function is_molotov_burning(molotov)
+    local fire_count = entity_get_prop(molotov, "m_fireCount")
+    return fire_count ~= nil and fire_count > 0
+end
+
+local function draw_bar(x, y, w, r, g, b, a, percentage, ltr, rev, outline)
+    local ltr = ltr == nil and true or ltr
+    local rev = rev == nil and false or rev
+    local outline = outline == nil and true or outline
+    local h = 4
+    if not (outline and (w > 2 and h > 2) or (w > 0 or h > 0)) then
+        error("Invalid arguments. Width and/or height too small")
+    end
+    local percentage = math_max(0, math_min(1, percentage))
+    local x_inner, y_inner = x, y
+    local w_inner, h_inner = w, h
+    local x_inner_add, y_inner_add = 0, 0
+    if outline then
+        w_inner, h_inner = w_inner-2, h_inner-2
+        x_inner, y_inner = x_inner+1, y_inner+1
+    end
+    local w_inner_prev = w_inner
+    w_inner, h_inner = math_ceil(w_inner * percentage), h_inner
+    if rev then
+        x_inner_add = (w_inner_prev - w_inner)
+    end
+    if not ltr then
+        w, h = h, w
+        w_inner, h_inner = h_inner, w_inner
+        x_inner_add, y_inner_add = y_inner_add, x_inner_add
+    end
+    local outline_r, outline_b, outline_g, outline_a = 16, 16, 16, 170
+    if outline then
+        renderer_rectangle(x, y, w, h, outline_r, outline_b, outline_g, outline_a)
+    end
+    renderer_rectangle(x_inner+x_inner_add, y_inner+y_inner_add, w_inner, h_inner, r, g, b, a)
+    return x_inner+x_inner_add, y_inner+y_inner_add, w_inner, h_inner
+end
+
+local function draw_circle_3d(x, y, z, radius, r, g, b, a, accuracy, width, outline, start_degrees, percentage)
+    local accuracy = accuracy ~= nil and accuracy or 3
+    local width = width ~= nil and width or 1
+    local outline = outline ~= nil and outline or false
+    local start_degrees = start_degrees ~= nil and start_degrees or 0
+    local percentage = percentage ~= nil and percentage or 1
+
+    local screen_x_line_old, screen_y_line_old
+    for rot=start_degrees, percentage*360, accuracy do
+        local rot_temp = math_rad(rot)
+        local lineX, lineY, lineZ = radius * math_cos(rot_temp) + x, radius * math_sin(rot_temp) + y, z
+        local screen_x_line, screen_y_line = renderer_world_to_screen(lineX, lineY, lineZ)
+        if screen_x_line ~=nil and screen_y_line ~= nil and screen_x_line_old ~= nil and screen_y_line_old ~= nil then
+            for i=1, width do
+                local i=i-1
+                renderer_line(screen_x_line, screen_y_line-i, screen_x_line_old, screen_y_line_old-i, r, g, b, a)
+            end
+            if outline then
+                local outline_a = a/255*160
+                renderer_line(screen_x_line, screen_y_line-width, screen_x_line_old, screen_y_line_old-width, 16, 16, 16, outline_a)
+                renderer_line(screen_x_line, screen_y_line+1, screen_x_line_old, screen_y_line_old+1, 16, 16, 16, outline_a)
+            end
+        end
+        screen_x_line_old, screen_y_line_old = screen_x_line, screen_y_line
+    end
+end
+local function on_player_connect_full(e)
+    if client_userid_to_entindex(e.userid) == entity_get_local_player() then
+        molotovs = {}
+        molotovs_temp = {}
+    end
+end
+client.set_event_callback("player_connect_full", on_player_connect_full)
+
+local function on_run_command(e)
+    if not ui_get(molotov_radius_reference) then
+        return
+    end
+    molotovs_temp = {}
+    molotovs_cells = {}
+    molotovs = entity_get_all("CInferno")
+    if #molotovs == 0 then return end
+    local curtime = globals_curtime()
+    for i=1, #molotovs do
+        local molotov = molotovs[i]
+        if is_molotov_burning(molotov) then
+            local origin_x, origin_y, origin_z = entity_get_prop(molotov, "m_vecOrigin")
+            local cell_radius = 40
+            local molotov_radius = 0
+            local center_x, center_y, center_z
+            local cells = {}
+            local highest_distance = 0
+            local cell_max_1, cell_max_2
+            for i=1, 64 do
+                if entity_get_prop(molotov, "m_bFireIsBurning", i) == 1 then
+                    local x_delta = entity_get_prop(molotov, "m_fireXDelta", i)
+                    local y_delta = entity_get_prop(molotov, "m_fireYDelta", i)
+                    local z_delta = entity_get_prop(molotov, "m_fireZDelta", i)
+                    table_insert(cells, {x_delta, y_delta, z_delta})
+                end
+            end
+            for i=1, #cells do
+                local cell = cells[i]
+                local x_delta, y_delta, z_delta = unpack(cell)
+                for i2=1, #cells do
+                    local cell2 = cells[i2]
+                    local distance = distance(x_delta, y_delta, cell2[1], cell2[2])
+                    if distance > highest_distance then
+                        highest_distance = distance
+                        cell_max_1 = cell
+                        cell_max_2 = cell2
+                    end
+                end
+            end
+            if cell_max_1 ~= nil and cell_max_2 ~= nil then
+                local x1, y1, z1 = origin_x+cell_max_1[1], origin_y+cell_max_1[2], origin_z+cell_max_1[3]
+                local x2, y2, z2 = origin_x+cell_max_2[1], origin_y+cell_max_2[2], origin_z+cell_max_2[3]
+                local center_x_delta, center_y_delta, center_z_delta = lerp_pos(cell_max_1[1], cell_max_1[2], cell_max_1[3], cell_max_2[1], cell_max_2[2], cell_max_2[3], 0.5)
+                local center_x, center_y, center_z = origin_x+center_x_delta, origin_y+center_y_delta, origin_z+center_z_delta
+                local radius = highest_distance/2+cell_radius
+                molotovs_temp[molotov] = {center_x, center_y, center_z, radius}
+                molotovs_cells[molotov] = cells
+            end
+        end
+    end
+end
+client.set_event_callback("run_command", on_run_command)
+
+local y_offset = -30 
+
+local function on_paint()
+
+    for class, display_name in pairs(class_names) do
+        local ents = entity_get_all(class)
+        for i=1, #ents do
+            local ent = ents[i]
+            if class == "CBaseCSGrenadeProjectile" then
+                local explode_effect = entity_get_prop(ent, "m_nExplodeEffectIndex")
+                if explode_effect ~= 0 and explode_effect ~= nil then
+                    goto skip
+                end
+            end
+            local x, y, z = entity_get_prop(ent, "m_vecOrigin")
+            if x ~= nil then
+                local sx, sy = renderer_world_to_screen(x, y, z)
+                if sx ~= nil and sy ~= nil then
+                    renderer_text(sx, sy + 10 + y_offset, 255, 255, 255, 255, "c-", 0, display_name)
+                end
+            end
+            ::skip::
+        end
+    end
+
+    local smoke_radius = ui_get(smoke_radius_reference)
+    local grenade_timer_value = ui_get(grenade_timer_reference)
+    local grenade_timer = #grenade_timer_value > 0
+    local molotov_team = ui_get(molotov_team_reference)
+    local molotov_radius = ui_get(molotov_radius_reference)
+    local local_player = entity_get_local_player()
+
+    if local_player == nil or not entity_is_alive(local_player) or entity_get_prop(local_player, "m_MoveType") == MOVETYPE_NOCLIP then
+        on_run_command()
+    end
+
+    if molotov_radius then
+        local r, g, b, a = ui_get(molotov_radius_color_reference)
+        for i=1, #molotovs do
+            local molotov = molotovs[i]
+            if molotovs_temp[molotov] ~= nil then
+                local center_x, center_y, center_z, radius = unpack(molotovs_temp[molotov])
+                local a_multiplier = 1
+                if molotovs_created_at[molotov] ~= nil then
+                    local time_since_created = globals_curtime() - molotovs_created_at[molotov]
+                    a_multiplier = math_max(0, 1 - time_since_created / molotov_duration)
+                end
+                draw_circle_3d(center_x, center_y, center_z, radius, r, g, b, a*a_multiplier, 9, 1, true)
+            end
+        end
+    end
+
+    if smoke_radius or grenade_timer or molotov_team then
+        local grenades = entity_get_all("CSmokeGrenadeProjectile")
+        local tickcount = globals_tickcount()
+        local tickinterval = globals_tickinterval()
+        local curtime = globals_curtime()
+
+        if grenade_timer or molotov_team then
+            local molotovs_created_at_prev = molotovs_created_at
+            molotovs_created_at = {}
+            for i=1, #molotovs do
+                local molotov = molotovs[i]
+                if is_molotov_burning(molotov) then
+                    molotovs_created_at[molotov] = molotovs_created_at_prev[molotov] ~= nil and molotovs_created_at_prev[molotov] or curtime
+                    table_insert(grenades, molotov)
+                end
+            end
+        end
+    
+        for i=1, #grenades do
+            local grenade = grenades[i]
+            local class_name = entity_get_classname(grenade)
+            local text, wx, wy
+            local percentage = 1
+            if class_name == "CSmokeGrenadeProjectile" then
+                local x, y, z = entity_get_prop(grenade, "m_vecOrigin")
+                wx, wy = renderer_world_to_screen(x, y, z)
+                local did_smoke_effect = entity_get_prop(grenade, "m_bDidSmokeEffect") == 1
+                if wx ~= nil and wy ~= nil then
+                    if did_smoke_effect then
+                        local ticks_created = entity_get_prop(grenade, "m_nSmokeEffectTickBegin")
+                        if ticks_created ~= nil then
+                            local time_since_explosion = tickinterval * (tickcount - ticks_created)
+                            if time_since_explosion > 0 and smoke_duration-time_since_explosion > 0 then
+                                if grenade_timer then
+                                    percentage = 1 - time_since_explosion / smoke_duration
+                                    text = string_format("%.1f", smoke_duration-time_since_explosion)
+                                end
+                                if smoke_radius then
+                                    local r, g, b, a = ui_get(smoke_radius_color_reference)
+                                    local radius = smoke_radius_units
+                                    if 0.3 > time_since_explosion then
+                                        radius = radius * 0.6 + (radius * (time_since_explosion / 0.3))*0.4
+                                        a = a * (time_since_explosion / 0.3)
+                                    end
+                                    if 1.0 > smoke_duration-time_since_explosion then
+                                        radius = radius * (((smoke_duration-time_since_explosion) / 1.0)*0.3 + 0.7)
+                                    end
+                                    draw_circle_3d(x, y, z, radius, r, g, b, a*math_min(1, percentage*1.3), 9, 1, true)
+                                end
+                            end
+                        end
+                    end
+                end
+            elseif class_name == "CInferno" then
+                if grenade_timer or molotov_team then
+                    local x, y, z = entity_get_prop(grenade, "m_vecOrigin")
+                    wx, wy = renderer_world_to_screen(x, y, z)
+                    if wx ~= nil and wy ~= nil then
+                        if grenade_timer then
+                            if molotovs_created_at[grenade] ~= nil then
+                                local time_since_created = curtime - molotovs_created_at[grenade]
+                                percentage = math_max(0, 1 - time_since_created / molotov_duration)
+                                text = string_format("%.1f", math_max(0, molotov_duration - time_since_created))
+                            end
+                        end
+                        if molotov_team then
+                            local thrower = entity_get_prop(grenade, "m_hOwnerEntity")
+                            local is_safe = false
+                            if thrower ~= nil and tonumber(client_get_cvar("mp_friendlyfire")) == 0 and thrower ~= local_player and not entity_is_enemy(thrower) then
+                                is_safe = true
+                            end
+                            if is_safe then
+                                renderer_text(wx-19, wy+5+y_offset, 149, 184, 6, 255*percentage, nil, 0, "✔")
+                            else
+                                renderer_text(wx-19, wy+4+y_offset, 230, 21, 21, 255*percentage, nil, 0, "❌")
+                            end
+                        end
+                    end
+                end
+            end
+            if wx ~= nil and wy ~= nil and text ~= nil then
+                local a = 255
+                if 0.08 > percentage then
+                    a = a * percentage/0.08
+                end
+                if contains(grenade_timer_value, "Bar") then
+                    local y_additional = (contains(grenade_timer_value, "Bar") and contains(grenade_timer_value, "Text")) and 1 or 0
+                    local x_text, _, w_text, _ = draw_bar(wx-bar_width/2+1, wy+16+y_offset+y_additional, bar_width, 255, 255, 255, a, percentage, true)
+                    if contains(grenade_timer_value, "Text") and 0.56 > percentage then
+                        renderer_text(x_text+w_text+5, wy+18+y_offset+y_additional, 255, 255, 255, a*0.7, "c-", 150, text)
+                    end
+                elseif contains(grenade_timer_value, "Text") then
+                    renderer_text(wx, wy+20+y_offset, 255, 255, 255, math_max(30, percentage * 255), "c-", 150, text, "  S")
+                end
+            end
+        end
+    end
+end
+
+client.set_event_callback("paint", on_paint)
+-- granade esp
+
+-- console filter
+local set_console = ui.new_checkbox("LUA", "B", "Filter console")
+
+ui.set_callback(set_console, function()
+    if ui.get(set_console) then
+        cvar.developer:set_int(0)
+        cvar.con_filter_enable:set_int(1)
+        cvar.con_filter_text:set_string("IrWL5106TZZKNFPz4P4Gl3pSN?J370f5hi373ZjPg%VOVh6lN")
+        client.exec("con_filter_enable 1")
+    else
+        cvar.con_filter_enable:set_int(0)
+        cvar.con_filter_text:set_string("")
+        client.exec("con_filter_enable 0")
+    end
+end)
+
+client.set_event_callback("shutdown", function()
+    cvar.con_filter_enable:set_int(0)
+    cvar.con_filter_text:set_string("")
+    client.exec("con_filter_enable 0")
+end)
+
+-- console filter
+
+-- console color
+local ffi = require 'ffi'
+local find_material = materialsystem.find_material
+
+local engine_client = ffi.cast(ffi.typeof('void***'), client.create_interface('engine.dll', 'VEngineClient014'))
+local console_is_visible = ffi.cast(ffi.typeof('bool(__thiscall*)(void*)'), engine_client[0][11])
+
+ui.new_label('LUA', 'B', 'console color')
+
+local recolor_console = ui.new_color_picker('LUA', 'B', 'console color pickker', 81, 81, 81, 210)
+local materials = { 'vgui_white', 'vgui/hud/800corner1', 'vgui/hud/800corner2', 'vgui/hud/800corner3', 'vgui/hud/800corner4' }
+
+client.set_event_callback('paint', function()
+    local r, g, b, a = ui.get(recolor_console)
+
+    if not console_is_visible(engine_client) then
+        r, g, b, a = 255, 255, 255, 255
+    end
+
+    for _, mat in pairs(materials) do
+        find_material(mat):alpha_modulate(a)
+        find_material(mat):color_modulate(r, g, b)
+    end
+end)
+-- console color
+
+-- knife left hand
+local knife_left_hand_enable = ui_new_checkbox("LUA", "B", "Left hand knife")
+
+local function handle_knife_hand()
+    if not ui_get(knife_left_hand_enable) then 
+        return 
+    end
+
+    local local_player = entity_get_local_player()
+    if not local_player or not entity_is_alive(local_player) then 
+        return 
+    end
+
+    local weapon_handle = entity_get_player_weapon(local_player)
+    if weapon_handle == nil then 
+        return 
+    end
+
+    local weapon_class = entity_get_classname(weapon_handle)
+
+    if weapon_class == "CKnife" or weapon_class == "CWeaponKnife" then
+        client_set_cvar("cl_righthand", "0")
+    else
+        client_set_cvar("cl_righthand", "1")
+    end
+end
+
+client_set_event_callback("paint", handle_knife_hand)
+-- knife left hand
+
+-- predbox
+local alpha_data = {}
+local enemy_pred_enable = ui.new_checkbox("LUA", "B", "enemy predict box")
+local pred_time = ui.new_slider("LUA", "B", "Prediction Ticks", 1, 64, 15)
+local pred_color = ui.new_color_picker("LUA", "B", "Prediction Color", 0, 180, 255, 255)
+
+local function draw_3d_box(ctx, ent, x, y, z, r, g, b, a)
+    local min_x, min_y, min_z = entity.get_prop(ent, "m_vecMins")
+    local max_x, max_y, max_z = entity.get_prop(ent, "m_vecMaxs")
+    
+    if not min_x then return end
+
+    local v = {
+        {x + min_x, y + min_y, z + min_z}, {x + min_x, y + max_y, z + min_z},
+        {x + max_x, y + max_y, z + min_z}, {x + max_x, y + min_y, z + min_z},
+        {x + min_x, y + min_y, z + max_z}, {x + min_x, y + max_y, z + max_z},
+        {x + max_x, y + max_y, z + max_z}, {x + max_x, y + min_y, z + max_z}
+    }
+
+    local connections = {
+        {1,2}, {2,3}, {3,4}, {4,1},
+        {5,6}, {6,7}, {7,8}, {8,5},
+        {1,5}, {2,6}, {3,7}, {4,8}
+    }
+
+    for i=1, #connections do
+        local p1 = v[connections[i][1]]
+        local p2 = v[connections[i][2]]
+        
+        local x1, y1 = client.world_to_screen(ctx, p1[1], p1[2], p1[3])
+        local x2, y2 = client.world_to_screen(ctx, p2[1], p2[2], p2[3])
+
+        if x1 and x2 then
+            client.draw_line(ctx, x1, y1, x2, y2, r, g, b, a)
+        end
+    end
+end
+
+client.set_event_callback("paint", function(ctx)
+    local me = entity.get_local_player()
+    if not me or not entity.is_alive(me) then return end
+
+    local ticks = ui.get(pred_time)
+    local r, g, b, a_max = ui.get(pred_color)
+    local frame_time = globals.frametime() * 8 
+    local interval = globals.tickinterval()
+
+    local players = entity.get_players()
+    
+    for i=1, #players do
+        local ent = players[i]
+        local is_enemy = entity.is_enemy(ent)
+        local is_me = (ent == me)
+        
+        local should_draw = (is_enemy and ui.get(enemy_pred_enable))
+        
+        if should_draw and entity.is_alive(ent) and not entity.is_dormant(ent) then
+            local vx, vy, vz = entity.get_prop(ent, "m_vecVelocity")
+            local speed = math.sqrt(vx*vx + vy*vy + vz*vz)
+            
+            if alpha_data[ent] == nil then alpha_data[ent] = 0 end
+
+            if speed > 10 then
+                alpha_data[ent] = math.min(1, alpha_data[ent] + frame_time)
+            else
+                alpha_data[ent] = math.max(0, alpha_data[ent] - frame_time)
+            end
+
+            local current_alpha = math.floor(a_max * alpha_data[ent])
+
+            if current_alpha > 0 then
+                local ox, oy, oz = entity.get_prop(ent, "m_vecOrigin")
+                local px = ox + (vx * interval * ticks)
+                local py = oy + (vy * interval * ticks)
+                local pz = oz + (vz * interval * ticks)
+                
+                draw_3d_box(ctx, ent, px, py, pz, r, g, b, current_alpha)
+            end
+        end
+    end
+end)
+-- pred box
+
+-- baim on lethal
+
+local vector = require('vector')
+
+local master_switch = ui_new_checkbox("LUA", "B", "Force Baim if Lethal")
+
+local baim_hitboxes = {3,4,5,6}
+
+function extrapolate_position(xpos,ypos,zpos,ticks,player)
+	local x,y,z = entity_get_prop(player, "m_vecVelocity")
+	for i = 0, ticks do
+		xpos =  xpos + (x * globals.tickinterval())
+		ypos =  ypos + (y * globals.tickinterval())
+		zpos =  zpos + (z * globals.tickinterval())
+	end
+	return xpos,ypos,zpos
+end
+
+local function is_baimable(ent, localplayer)	
+    local final_damage  = 0
+
+    local eyepos_x, eyepos_y, eyepos_z = client_eye_position()
+    local  fs_stored_eyepos_x, fs_stored_eyepos_y, fs_stored_eyepos_z
+
+    eyepos_x, eyepos_y, eyepos_z = extrapolate_position(eyepos_x, eyepos_y, eyepos_z, 20, localplayer)
+
+    fs_stored_eyepos_x, fs_stored_eyepos_y, fs_stored_eyepos_z = eyepos_x, eyepos_y, eyepos_z
+    for k,v in pairs(baim_hitboxes) do
+        local hitbox    = vector(entity_hitbox_position(ent, v))
+	    local ___, dmg  = client_trace_bullet(localplayer, fs_stored_eyepos_x, fs_stored_eyepos_y, fs_stored_eyepos_z, hitbox.x, hitbox.y, hitbox.z, true)
+	
+	    if ( dmg > final_damage) then
+            final_damage = dmg
+        end
+	end
+    
+    return final_damage
+end
+
+local function on_run_command()
+    local me        = entity_get_local_player()
+    local weapon    = entity_get_player_weapon(me)
+    local players   = entity_get_players()
+
+    if weapon == nil then return end
+
+    for i=1, #players do
+        local player        = players[i]
+        local target_health = entity_get_prop(player, "m_iHealth") 
+        local is_lethal     = is_baimable(player, me) >= target_health
+
+        if ( target_health <= 0 ) then return end
+
+        if (is_lethal) then 
+            plist_set(player, "Override prefer body aim", "Force")
+
+        else 
+            plist_set(player, "Override prefer body aim", "-")
+        end
+    end
+end
+
+client.register_esp_flag("BAIM", 50, 205, 0, function(player)
+    if not ui_get(master_switch) then return false end
+
+    return plist_get(player, "Override prefer body aim") == "Force"
+end)
+
+ui_set_callback(master_switch, function()
+    local enabled            = ui_get(master_switch)
+    local update_callback    = enabled and client.set_event_callback or client.unset_event_callback
+
+    update_callback("run_command", on_run_command)
+end)
+-- baim on lethal
+
+-- clantag
+local ffi = require("ffi")
+
+ffi.cdef[[
+    typedef void(__fastcall* set_clantag_t)(const char*, const char*);
+]]
+
+local signature = "\x53\x56\x57\x8B\xDA\x8B\xF9\xFF\x15"
+local set_clantag_raw = ffi.cast("set_clantag_t", client.find_signature("engine.dll", signature))
+
+local function set_clantag(tag)
+    if set_clantag_raw ~= nil then
+        set_clantag_raw(tag, tag)
+    end
+end
+
+local clantag_enable = ui.new_checkbox("LUA", "B", "Enable Custom Clantag")
+local clantag_text = ui.new_textbox("LUA", "B", "Clantag Name")
+local clantag_style = ui.new_combobox("LUA", "B", "Animation Style", {"Static", "Build-up"})
+
+client.delay_call(0.1, function()
+
+    ui.set(clantag_text, "pastesense")
+    ui.set(clantag_style, "Build-up")
+end)
+
+local function handle_menu()
+    local active = ui.get(clantag_enable)
+    ui.set_visible(clantag_text, active)
+    ui.set_visible(clantag_style, active)
+end
+
+ui.set_callback(clantag_enable, function(ref)
+    handle_menu()
+    if not ui.get(ref) then
+        set_clantag("")
+    end
+end)
+
+local last_time = 0
+local current_index = 0
+
+client.set_event_callback("net_update_end", function()
+
+    if clantag_enable == nil then return end
+    if not ui.get(clantag_enable) then return end
+    
+    local me = entity.get_local_player()
+    if me == nil then return end
+
+    local tag = ui.get(clantag_text)
+    if tag == "" or tag == nil then return end
+
+    local style = ui.get(clantag_style)
+    local cur_time = math.floor(globals.curtime() * 2.3)
+
+    if cur_time ~= last_time then
+        if style == "Static" then
+            set_clantag(tag)
+        elseif style == "Build-up" then
+            local len = #tag
+            if len > 0 then
+                local total_steps = (len + 1) * 2 
+                local shift = current_index % total_steps
+                
+                if shift <= len then
+                    set_clantag(tag:sub(1, shift))
+                else
+                    local disappear_len = len - (shift - len)
+                    set_clantag(tag:sub(1, math.max(0, disappear_len)))
+                end
+                current_index = current_index + 1
+            end
+        end
+        last_time = cur_time
+    end
+end)
+
+
+handle_menu()
+
+-- clantag
+
+-- history esp
+local trail_local = ui.new_checkbox("LUA", "B", "Trail")
+local trail_ticks = ui.new_slider("LUA", "B", "History Ticks", 1, 64, 20)
+local trail_mode = ui.new_combobox("LUA", "B", "Color Mode", {"Static", "Rainbow", "Gradient"})
+local trail_color = ui.new_color_picker("LUA", "B", "History Color 1", 0, 180, 255, 255)
+local trail_color2 = ui.new_color_picker("LUA", "B", "History Color 2 (Gradient)", 255, 255, 255, 255)
+
+local history_data = {}
+
+client.set_event_callback("setup_command", function()
+    local me = entity.get_local_player()
+    local is_enabled = ui.get(trail_local)
+
+    if not me or not is_enabled or not entity.is_alive(me) then 
+        history_data = {} 
+        return 
+    end
+
+    if not history_data[me] then history_data[me] = {} end
+    
+    local vx, vy, vz = entity.get_prop(me, "m_vecVelocity")
+    local speed = math.sqrt(vx*vx + vy*vy + vz*vz)
+    local max_ticks = ui.get(trail_ticks)
+
+    if speed > 10 then
+        local x, y, z = entity.get_prop(me, "m_vecOrigin")
+        table.insert(history_data[me], 1, {x = x, y = y, z = z})
+    else
+        if #history_data[me] > 0 then table.remove(history_data[me]) end
+    end
+    
+    while #history_data[me] > max_ticks do
+        table.remove(history_data[me])
+    end
+end)
+
+local function get_rainbow(speed, offset)
+    local t = (globals.curtime() * speed + offset) % 1
+    local i = t * 6
+    local f = i - math.floor(i)
+    local q = 1 - f
+    if i < 1 then return 255, f*255, 0 elseif i < 2 then return q*255, 255, 0 elseif i < 3 then return 0, 255, f*255
+    elseif i < 4 then return 0, q*255, 255 elseif i < 5 then return f*255, 0, 255 else return 255, 0, q*255 end
+end
+
+local function lerp(a, b, t)
+    return a + (b - a) * t
+end
+
+client.set_event_callback("paint", function(ctx)
+    local main_active = ui.get(trail_local)
+    local current_mode = ui.get(trail_mode)
+    
+    ui.set_visible(trail_ticks, main_active)
+    ui.set_visible(trail_mode, main_active)
+    ui.set_visible(trail_color, main_active)
+    ui.set_visible(trail_color2, main_active and current_mode == "Gradient")
+    
+    if not main_active then return end
+    
+    local me = entity.get_local_player()
+    local points = history_data[me]
+    if not points or #points < 2 then return end
+
+    local r1, g1, b1, a1 = ui.get(trail_color)
+    local r2, g2, b2, a2 = ui.get(trail_color2)
+
+    for i=1, #points - 1 do
+        local p1, p2 = points[i], points[i+1]
+        local x1, y1 = client.world_to_screen(ctx, p1.x, p1.y, p1.z)
+        local x2, y2 = client.world_to_screen(ctx, p2.x, p2.y, p2.z)
+
+        if x1 and x2 then
+            local fraction = i / #points
+            local r, g, b = r1, g1, b1
+            local alpha = a1 
+
+            if current_mode == "Rainbow" then
+                r, g, b = get_rainbow(0.5, i * 0.05)
+
+                alpha = math.floor(a1 * (1 - fraction))
+            elseif current_mode == "Gradient" then
+                r = lerp(r1, r2, fraction)
+                g = lerp(g1, g2, fraction)
+                b = lerp(b1, b2, fraction)
+                alpha = math.floor(lerp(a1, a2, fraction) * (1 - fraction))
+            else
+                
+                alpha = math.floor(a1 * (1 - fraction))
+            end
+            
+            for ox = -1, 1 do
+                for oy = -1, 1 do
+                    client.draw_line(ctx, x1 + ox, y1 + oy, x2 + ox, y2 + oy, r, g, b, alpha)
+                end
+            end
+        end
+    end
+end)
+
+client.set_event_callback("level_init", function() history_data = {} end)
+-- history esp
+
+
+
+-- chinese hat
+local thirdperson_enabled, thirdperson_key = ui.reference("Visuals", "Effects", "Force Third person (alive)")
+
+local hat_enabled = ui.new_checkbox("LUA", "B", "Chinese Hat")
+local hat_radius = ui.new_slider("LUA", "B", "Hat Radius", 1, 50, 10)
+local hat_height = ui.new_slider("LUA", "B", "Hat Dome Height", 0, 50, 11)
+local hat_offset = ui.new_slider("LUA", "B", "Vertical Offset", -20, 50, -1)
+local hat_mode = ui.new_combobox("LUA", "B", "Hat Color Mode", {"Static", "Rainbow", "Gradient"})
+local hat_color1 = ui.new_color_picker("LUA", "B", "Hat Color 1", 255, 255, 255, 200)
+local hat_color2 = ui.new_color_picker("LUA", "B", "Hat Color 2", 0, 180, 255, 200)
+
+local function handle_menu()
+    local active = ui.get(hat_enabled)
+    ui.set_visible(hat_radius, active)
+    ui.set_visible(hat_height, active)
+    ui.set_visible(hat_offset, active)
+    ui.set_visible(hat_mode, active)
+    ui.set_visible(hat_color1, active)
+    ui.set_visible(hat_color2, active)
+end
+
+ui.set_callback(hat_enabled, handle_menu)
+handle_menu()
+
+local function get_rainbow(speed, offset)
+    local t = (globals.curtime() * speed + offset) % 1
+    local i = t * 6
+    local f = i - math.floor(i)
+    local q = 1 - f
+    if i < 1 then return 255, f*255, 0 elseif i < 2 then return q*255, 255, 0 elseif i < 3 then return 0, 255, f*255
+    elseif i < 4 then return 0, q*255, 255 elseif i < 5 then return f*255, 0, 255 else return 255, 0, q*255 end
+end
+
+local function lerp(a, b, t) return a + (b - a) * t end
+
+
+client.set_event_callback("paint", function()
+ 
+    if not ui.get(hat_enabled) then return end
+
+    if not ui.get(thirdperson_enabled) or not ui.get(thirdperson_key) then 
+        return 
+    end
+
+    local me = entity.get_local_player()
+    if not me or not entity.is_alive(me) then return end
+
+    local h_x, h_y, h_z = entity.hitbox_position(me, 0)
+    if h_x == nil then return end
+
+    local offset = ui.get(hat_offset)
+    local height = ui.get(hat_height)
+    local radius = ui.get(hat_radius)
+    local mode = ui.get(hat_mode)
+    
+    local r1, g1, b1, a1 = ui.get(hat_color1)
+    local r2, g2, b2, a2 = ui.get(hat_color2)
+
+    local cx, cy = renderer.world_to_screen(h_x, h_y, h_z + offset + height)
+    if not cx then return end
+
+    local segments = 60
+    local step = (math.pi * 2) / segments
+
+    for i = 0, segments do
+        local angle = i * step
+        local next_angle = (i + 1) * step
+
+        local x1, y1 = h_x + math.cos(angle) * radius, h_y + math.sin(angle) * radius
+        local x2, y2 = h_x + math.cos(next_angle) * radius, h_y + math.sin(next_angle) * radius
+
+        local sx1, sy1 = renderer.world_to_screen(x1, y1, h_z + offset)
+        local sx2, sy2 = renderer.world_to_screen(x2, y2, h_z + offset)
+
+        if sx1 and sx2 then
+            local r, g, b, a = r1, g1, b1, a1
+            if mode == "Rainbow" then
+                r, g, b = get_rainbow(0.5, i * 0.02)
+            elseif mode == "Gradient" then
+                local fraction = i / segments
+                r = lerp(r1, r2, fraction)
+                g = lerp(g1, g2, fraction)
+                b = lerp(b1, b2, fraction)
+                a = lerp(a1, a2, fraction)
+            end
+
+            renderer.line(sx1, sy1, sx2, sy2, r, g, b, a)
+            renderer.line(sx1, sy1, cx, cy, r, g, b, a / 2.5)
+        end
+    end
+end)
+-- chinese hat
+
+-- hitlog
+surface = require "gamesense/surface"
+
+c_constant = {}
+c_constant.fonts = {}
+c_constant.fonts.lucida = surface.create_font('Lucida Console', 10, 400, 128)
+
+enabled = ui.new_checkbox("LUA", "B", "Hit Logs (Screen)")
+console_logs = ui.new_checkbox("LUA", "B", "Console Logs")
+prefix_color = ui.new_color_picker("LUA", "B", "Prefix Color", 112, 74, 217, 255)
+hit_color = ui.new_color_picker("LUA", "B", "Hit Color", 47, 202, 159, 255)
+miss_color = ui.new_color_picker("LUA", "B", "Miss Color", 255, 100, 100, 255)
+
+hitgroup_names = { [0] = "generic", [1] = "head", [2] = "chest", [3] = "stomach", [4] = "left arm", [5] = "right arm", [6] = "left leg", [7] = "right leg", [8] = "neck", [9] = "?", [10] = "gear" }
+shot_data = {}
+
+miscellaneous = {}
+miscellaneous.custom_output = {} 
+
+do
+    list = {}
+    skip_line = false
+
+    miscellaneous.custom_output.paint_ui = function()
+        if #list == 0 or not ui.get(enabled) then return end
+
+        ft = globals.frametime()
+        hs = select(2, surface.get_text_size(c_constant.fonts.lucida, 'A'))
+        x, y, size = 8, 5, hs
+
+        for i = #list, 1, -1 do
+            notify = list[i]
+            if notify then
+                notify.m_time = notify.m_time - ft
+                if notify.m_time <= 0 then
+                    table.remove(list, i)
+                end
+            end
+        end
+
+        if #list == 0 then return end
+        while #list > 8 do table.remove(list, 1) end
+
+        for i = 1, #list do
+            notify = list[i]
+            left = notify.m_time
+            alpha = 255
+
+            if left < 0.5 then
+                fl = math.max(0, left / 0.5)
+                alpha = fl * 255
+                if i == 1 and fl < 0.2 then
+                    y = y - size * (1.0 - fl * 5)
+                end
+            end
+
+            w_o = 0
+            -- Рисуем каждый сегмент отдельно, чтобы избежать HEX-символов на экране
+            for j = 1, #notify.m_parts do
+                part = notify.m_parts[j]
+                this_w = surface.get_text_size(c_constant.fonts.lucida, part.text)
+                
+                surface.draw_text(x + w_o, y, part.r, part.g, part.b, alpha, c_constant.fonts.lucida, part.text)
+                w_o = w_o + this_w
+            end
+            y = y + size + 2
+        end
+    end
+
+    miscellaneous.custom_output.output = function(output)
+        text_to_draw = output.text
+        if text_to_draw:find('\0') then
+            text_to_draw = text_to_draw:sub(1, #text_to_draw-1)
+        end
+
+        part_data = { text = text_to_draw, r = output.r, g = output.g, b = output.b }
+
+        if skip_line and list[#list] then
+            table.insert(list[#list].m_parts, part_data)
+            skip_line = false
+        else
+            table.insert(list, { m_parts = { part_data }, m_time = 8.0 })
+        end
+
+        if output.text:find('\0') ~= nil then
+            skip_line = true
+        end
+    end
+end
+
+send_to_logs = function(parts, is_hit)
+    pr, pg, pb = ui.get(prefix_color)
+    er, eg, eb = ui.get(is_hit and hit_color or miss_color)
+
+    if ui.get(console_logs) then
+        client.color_log(pr, pg, pb, "[pastesense] \0")
+        for i=1, #parts do
+            p = parts[i]
+            r, g, b = p.colored and er or 255, p.colored and eg or 255, p.colored and eb or 255
+            client.color_log(r, g, b, p.text .. (i == #parts and "" or "\0"))
+        end
+    end
+
+    if ui.get(enabled) then
+        miscellaneous.custom_output.output({text = "[pastesense] \0", r = pr, g = pg, b = pb})
+        for i=1, #parts do
+            p = parts[i]
+            r, g, b = p.colored and er or 255, p.colored and eg or 255, p.colored and eb or 255
+            miscellaneous.custom_output.output({text = p.text .. (i == #parts and "" or "\0"), r = r, g = g, b = b})
+        end
+    end
+end
+
+client.set_event_callback("aim_fire", function(e) shot_data[e.id] = { tick = e.tick } end)
+
+client.set_event_callback("aim_hit", function(e)
+    target_name = entity.get_player_name(e.target)
+    backtrack = (shot_data[e.id] and shot_data[e.id].tick) and (globals.tickcount() - shot_data[e.id].tick) or 0
+    body_yaw = entity.get_prop(e.target, "m_flPoseParameter", 11)
+    desync = body_yaw ~= nil and math.floor((body_yaw * 120) - 60) or 0
+
+    send_to_logs({
+        {text = "Hit ", colored = false}, {text = target_name, colored = true},
+        {text = " in the ", colored = false}, {text = (hitgroup_names[e.hitgroup] or "head"), colored = true},
+        {text = " for ", colored = false}, {text = tostring(e.damage), colored = true},
+        {text = " damage (", colored = false}, {text = tostring(math.max(0, entity.get_prop(e.target, "m_iHealth"))), colored = true},
+        {text = " hp) [bt: ", colored = false}, {text = tostring(backtrack), colored = true},
+        {text = " | ds: ", colored = false}, {text = tostring(desync) .. "°", colored = true}, {text = "]", colored = false}
+    }, true)
+end)
+
+client.set_event_callback("aim_miss", function(e)
+    target_name = entity.get_player_name(e.target)
+    backtrack = (shot_data[e.id] and shot_data[e.id].tick) and (globals.tickcount() - shot_data[e.id].tick) or 0
+    
+    send_to_logs({
+        {text = "Missed ", colored = false}, {text = target_name, colored = true},
+        {text = " in the ", colored = false}, {text = (hitgroup_names[e.hitgroup] or "head"), colored = true},
+        {text = " due to ", colored = false}, {text = e.reason, colored = true},
+        {text = " (", colored = false}, {text = math.floor(e.hit_chance + 0.5) .. "%", colored = true},
+        {text = " hc) [bt: ", colored = false}, {text = tostring(backtrack), colored = true}, {text = "]", colored = false}
+    }, false)
+end)
+
+client.set_event_callback("paint", miscellaneous.custom_output.paint_ui)
+
+
+-- hitlog
+
+-- hit sound
+enabled_hit = ui.new_checkbox("LUA", "B", "Custom Hitsound")
+sound_path = ui.new_textbox("LUA", "B", "Custom Path")
+volume = 100
+info_label = ui.new_label("LUA", "B", "sounds path 'csgo legacy/sounds'")
+
+ui.set(sound_path, "sparkle")
+
+function handle_menu()
+    local active = ui.get(enabled_hit)
+    ui.set_visible(sound_path, active)
+    ui.set_visible(info_label, active)
+end
+
+ui.set_callback(enabled_hit, handle_menu)
+handle_menu()
+
+client.set_event_callback("player_hurt", function(e)
+    if not ui.get(enabled_hit) then return end
+
+    local attacker = client.userid_to_entindex(e.attacker)
+    if attacker ~= entity.get_local_player() then return end
+
+    local victim = client.userid_to_entindex(e.userid)
+    if victim == entity.get_local_player() then return end
+
+    local path = ui.get(sound_path)
+    if path == "" then return end
+
+    if not path:find("%.wav$") then
+        path = path .. ".wav"
+    end
+
+    client.exec(string.format("playvol %s %f", path, volume))
+end)
+-- hit sound
+
+-- world modulate
+mat_ambient_light_r, mat_ambient_light_g, mat_ambient_light_b = cvar.mat_ambient_light_r, cvar.mat_ambient_light_g, cvar.mat_ambient_light_b
+r_modelAmbientMin = cvar.r_modelAmbientMin
+
+wallcolor_reference = ui.new_checkbox("VISUALS", "Effects", "Wall Color")
+
+master_switch = ui.new_checkbox("LUA", "B", "World visuals")
+
+bloom_reference = ui.new_slider("LUA", "B", "Bloom scale", -1, 500, -1, true, nil, 0.01, {[-1]="Off"})
+exposure_reference = ui.new_slider("LUA", "B", "Auto Exposure", -1, 2000, -1, true, nil, 0.001, {[-1]="Off"})
+model_ambient_min_reference = ui.new_slider("LUA", "B", "Minimum model brightness", 0, 1000, -1, true, nil, 0.05)
+
+function handle_menu_visibility()
+    local state = ui.get(master_switch)
+    ui.set_visible(bloom_reference, state)
+    ui.set_visible(exposure_reference, state)
+    ui.set_visible(model_ambient_min_reference, state)
+end
+
+ui.set_callback(master_switch, handle_menu_visibility)
+
+handle_menu_visibility()
+
+max_val = 1
+bloom_default, exposure_min_default, exposure_max_default = nil, nil, nil
+bloom_prev, exposure_prev, model_ambient_min_prev, wallcolor_prev = nil, nil, nil, nil
+
+mat_ambient_light_r = cvar.mat_ambient_light_r
+mat_ambient_light_g = cvar.mat_ambient_light_g
+mat_ambient_light_b = cvar.mat_ambient_light_b
+r_modelAmbientMin = cvar.r_modelAmbientMin
+
+function reset_bloom(tone_map_controller)
+	if bloom_default == -1 then
+		entity_set_prop(tone_map_controller, "m_bUseCustomBloomScale", 0)
+		entity_set_prop(tone_map_controller, "m_flCustomBloomScale", 0)
+	else
+		entity_set_prop(tone_map_controller, "m_bUseCustomBloomScale", 1)
+		entity_set_prop(tone_map_controller, "m_flCustomBloomScale", bloom_default)
+	end
+end
+
+function reset_exposure(tone_map_controller)
+	if exposure_min_default == -1 then
+		entity_set_prop(tone_map_controller, "m_bUseCustomAutoExposureMin", 0)
+		entity_set_prop(tone_map_controller, "m_flCustomAutoExposureMin", 0)
+	else
+		entity_set_prop(tone_map_controller, "m_bUseCustomAutoExposureMin", 1)
+		entity_set_prop(tone_map_controller, "m_flCustomAutoExposureMin", exposure_min_default)
+	end
+	if exposure_max_default == -1 then
+		entity_set_prop(tone_map_controller, "m_bUseCustomAutoExposureMax", 0)
+		entity_set_prop(tone_map_controller, "m_flCustomAutoExposureMax", 0)
+	else
+		entity_set_prop(tone_map_controller, "m_bUseCustomAutoExposureMax", 1)
+		entity_set_prop(tone_map_controller, "m_flCustomAutoExposureMax", exposure_max_default)
+	end
+end
+
+function on_paint()
+
+    if not ui.get(master_switch) then return end
+
+	local bloom = ui.get(bloom_reference)
+	local exposure = ui.get(exposure_reference)
+    local model_ambient_min = ui.get(model_ambient_min_reference)
+
+	if model_ambient_min > 0 or (model_ambient_min_prev ~= nil and model_ambient_min_prev > 0) then
+		if r_modelAmbientMin:get_float() ~= model_ambient_min*0.05 then
+			r_modelAmbientMin:set_raw_float(model_ambient_min*0.05)
+		end
+	end
+	model_ambient_min_prev = model_ambient_min
+
+	if bloom ~= -1 or exposure ~= -1 or bloom_prev ~= -1 or exposure_prev ~= -1 then
+		local tone_map_controllers = entity.get_all("CEnvTonemapController")
+		for i=1, #tone_map_controllers do
+			local tone_map_controller = tone_map_controllers[i]
+			if bloom ~= -1 then
+				if bloom_default == nil then
+					if entity.get_prop(tone_map_controller, "m_bUseCustomBloomScale") == 1 then
+						bloom_default = entity.get_prop(tone_map_controller, "m_flCustomBloomScale")
+					else
+						bloom_default = -1
+					end
+				end
+				entity.set_prop(tone_map_controller, "m_bUseCustomBloomScale", 1)
+				entity.set_prop(tone_map_controller, "m_flCustomBloomScale", bloom*0.01)
+			elseif bloom_prev ~= nil and bloom_prev ~= -1 and bloom_default ~= nil then
+				reset_bloom(tone_map_controller)
+			end
+			if exposure ~= -1 then
+				if exposure_min_default == nil then
+					if entity.get_prop(tone_map_controller, "m_bUseCustomAutoExposureMin") == 1 then
+						exposure_min_default = entity.get_prop(tone_map_controller, "m_flCustomAutoExposureMin")
+					else
+						exposure_min_default = -1
+					end
+					if entity.get_prop(tone_map_controller, "m_bUseCustomAutoExposureMax") == 1 then
+						exposure_max_default = entity.get_prop(tone_map_controller, "m_flCustomAutoExposureMax")
+					else
+						exposure_max_default = -1
+					end
+				end
+				entity.set_prop(tone_map_controller, "m_bUseCustomAutoExposureMin", 1)
+				entity.set_prop(tone_map_controller, "m_bUseCustomAutoExposureMax", 1)
+				entity.set_prop(tone_map_controller, "m_flCustomAutoExposureMin", math.max(0.0000, exposure*0.001))
+				entity.set_prop(tone_map_controller, "m_flCustomAutoExposureMax", math.max(0.0000, exposure*0.001))
+			elseif exposure_prev ~= nil and exposure_prev ~= -1 and exposure_min_default ~= nil then
+				reset_exposure(tone_map_controller)
+			end
+		end
+	end
+	bloom_prev = bloom
+	exposure_prev = exposure
+end
+
+client.set_event_callback("paint", on_paint)
+
+function task()
+	if globals.mapname() == nil then
+		bloom_default, exposure_min_default, exposure_max_default = nil, nil, nil
+	end
+	client.delay_call(0.5, task)
+end
+task()
+
+function on_shutdown()
+	local tone_map_controllers = entity.get_all("CEnvTonemapController")
+	for i=1, #tone_map_controllers do
+		local tone_map_controller = tone_map_controllers[i]
+		if bloom_prev ~= -1 and bloom_default ~= nil then
+			reset_bloom(tone_map_controller)
+		end
+		if exposure_prev ~= -1 and exposure_min_default ~= nil then
+			reset_exposure(tone_map_controller)
+		end
+	end
+	mat_ambient_light_r:set_raw_float(0)
+	mat_ambient_light_g:set_raw_float(0)
+	mat_ambient_light_b:set_raw_float(0)
+	r_modelAmbientMin:set_raw_float(0)
+end
+client.set_event_callback("shutdown", on_shutdown)
+
+
+
+var_0_0 = require("ffi")
+var_0_1 = entity
+var_0_2 = ui
+var_0_3 = globals
+var_0_4 = bit
+var_0_5 = 14
+var_0_6 = 100
+var_0_7 = {
+	"models/props/de_mirage/towertop_d/towertop_d",
+	"models/props/de_dust/palace_bigdome",
+	"models/props_lighting/",
+	"decals/",
+	"particle/",
+	"de_nuke/nuke_beam_"
+}
+var_0_8 = {
+	"models/props/de_dust/hr_dust/dust_skybox/",
+	"models/props/de_inferno/hr_i/inferno_skybox",
+	"models/props/de_nuke/hr_nuke/nuke_skydome_001",
+	"models/props/cs_office/clouds",
+	"skybox/"
+}
+var_0_9 = var_0_2.reference("VISUALS", "Effects", "Remove fog")
+var_0_10 = var_0_2.reference("VISUALS", "Colored models", "Props")
+var_0_11 = var_0_2.new_checkbox("LUA", "B", "Override fog")
+var_0_12 = var_0_2.new_color_picker("LUA", "B", "Override fog color", 235, 225, 225, 105)
+var_0_13 = var_0_2.new_slider("LUA", "B", "\nFog start color", -5000 / var_0_6, 15000 / var_0_6, 0 / var_0_6, true, "", var_0_6)
+var_0_14 = var_0_2.new_slider("LUA", "B", "\nFog end color", -5000 / var_0_6, 15000 / var_0_6, 7500 / var_0_6, true, "", var_0_6)
+var_0_15 = var_0_2.new_checkbox("LUA", "B", "Skybox fog")
+
+var_0_2.set_visible(var_0_13, false)
+var_0_2.set_visible(var_0_14, false)
+var_0_2.set_visible(var_0_15, false)
+var_0_2.set(var_0_15, true)
+
+var_0_16 = vtable_bind("client.dll", "VClientEntityList003", 3, "uintptr_t(__thiscall*)(void*, int)")
+
+cvar.r_disable_distance_fade_on_big_props:set_raw_int(1)
+cvar.r_disable_distance_fade_on_big_props_thresh:set_raw_float(500)
+
+var_0_17 = var_0_0.cast("intptr_t**", var_0_0.cast("char*", client.find_signature("engine.dll", "\xBE\xCC\xCC\xCC̋\x0E\x85\xC9t\v\x8B\x01\xFFP4")) + 1)[0]
+var_0_18 = nil
+var_0_19 = 1
+var_0_20 = var_0_0.new("uint8_t[4]")
+var_0_21 = var_0_0.cast("uint32_t*", var_0_20)
+
+function var_0_22(arg_1_0, arg_1_1, arg_1_2, arg_1_3)
+	var_0_20[0] = arg_1_0
+	var_0_20[1] = arg_1_1
+	var_0_20[2] = arg_1_2
+	var_0_20[3] = arg_1_3
+
+	return var_0_21[0]
+end
+
+function var_0_23(arg_2_0, arg_2_1, arg_2_2)
+	return var_0_4.bor(arg_2_0, var_0_4.lshift(arg_2_1, 8), var_0_4.lshift(arg_2_2, 16))
+end
+
+var_0_24 = {}
+
+function var_0_25(arg_3_0, arg_3_1, ...)
+	var_0_24[arg_3_0][arg_3_1] = {
+		var_0_1.get_prop(arg_3_0, arg_3_1)
+	}
+
+	var_0_1.set_prop(arg_3_0, arg_3_1, ...)
+end
+
+function var_0_26()
+	for iter_4_0, iter_4_1 in pairs(var_0_24) do
+		for iter_4_2, iter_4_3 in pairs(iter_4_1) do
+			var_0_1.set_prop(iter_4_0, iter_4_2, unpack(iter_4_3))
+		end
+	end
+
+	table.clear(var_0_24)
+end
+
+function var_0_27(arg_5_0)
+	local var_5_0 = not arg_5_0 and var_0_2.get(var_0_11)
+
+	for iter_5_0, iter_5_1 in ipairs(var_0_7) do
+		for iter_5_2, iter_5_3 in ipairs(materialsystem.find_materials(iter_5_1) or {}) do
+			iter_5_3:set_material_var_flag(var_0_5, not var_5_0)
+
+			local var_5_1 = iter_5_3:get_shader_param("$fogfadeend")
+
+			if var_5_1 ~= nil and (var_5_1 == 0 or var_5_1 > 0.3) then
+				iter_5_3:set_shader_param("$fogfadeend", 0.33)
+			end
+
+			if iter_5_3:get_shader_param("$fogscale") ~= nil then
+				iter_5_3:set_shader_param("$fogscale", 1)
+			end
+
+			if iter_5_3:get_shader_param("$vertexfogamount") ~= nil then
+				iter_5_3:set_shader_param("$vertexfogamount", 2)
+			end
+		end
+	end
+
+	local var_5_2 = var_5_0 and var_0_2.get(var_0_15)
+
+	for iter_5_4, iter_5_5 in ipairs(var_0_8) do
+		for iter_5_6, iter_5_7 in ipairs(materialsystem.find_materials(iter_5_5) or {}) do
+			iter_5_7:set_material_var_flag(var_0_5, not var_5_2)
+		end
+	end
+
+	local var_5_3 = var_0_3.mapname() or ""
+
+	if var_5_3:find("office") then
+		var_0_19 = 1.75
+	elseif var_5_3:find("italy") then
+		var_0_19 = 1.3
+	else
+		var_0_19 = 1
+	end
+end
+
+function var_0_28()
+	local var_6_0 = var_0_1.get_local_player()
+
+	if var_6_0 == nil then
+		return
+	end
+
+	local var_6_1 = 1
+	local var_6_2, var_6_3, var_6_4, var_6_5 = var_0_2.get(var_0_12)
+	local var_6_6 = var_0_23(var_6_2, var_6_3, var_6_4)
+	local var_6_7 = var_0_2.get(var_0_13) * var_0_6 * var_0_19
+	local var_6_8 = var_0_2.get(var_0_14) * var_0_6 * var_0_19
+	local var_6_9 = var_6_5 / 255
+	local var_6_10 = var_0_4.band(math.max(0, var_0_1.get_prop(var_6_0, "m_PlayerFog.m_hCtrl") or 0), 65535)
+
+	if var_6_10 > 0 and var_6_10 < 65535 then
+		var_0_24[var_6_10] = {}
+
+		var_0_25(var_6_10, "m_fog.enable", var_6_1)
+		var_0_25(var_6_10, "m_fog.dirPrimary", 0, 0, 0)
+		var_0_25(var_6_10, "m_fog.colorPrimary", var_6_6)
+		var_0_25(var_6_10, "m_fog.colorSecondary", var_6_6)
+		var_0_25(var_6_10, "m_fog.start", var_6_7)
+		var_0_25(var_6_10, "m_fog.end", var_6_8)
+		var_0_25(var_6_10, "m_fog.maxdensity", var_6_9)
+		var_0_25(var_6_10, "m_fog.ZoomFogScale", 0)
+		var_0_25(var_6_10, "m_fog.HDRColorScale", 1)
+		var_0_25(var_6_10, "m_fog.blend", 0)
+		var_0_25(var_6_10, "m_fog.duration", 0)
+	end
+
+	var_0_24[var_6_0] = {}
+
+	var_0_25(var_6_0, "m_skybox3d.fog.enable", var_6_1)
+	var_0_25(var_6_0, "m_skybox3d.fog.dirPrimary", 0, 0, 0)
+	var_0_25(var_6_0, "m_skybox3d.fog.colorPrimary", var_6_6)
+	var_0_25(var_6_0, "m_skybox3d.fog.colorSecondary", var_6_6)
+	var_0_25(var_6_0, "m_skybox3d.fog.start", var_6_7)
+	var_0_25(var_6_0, "m_skybox3d.fog.end", var_6_8)
+	var_0_25(var_6_0, "m_skybox3d.fog.maxdensity", var_6_9)
+	var_0_25(var_6_0, "m_skybox3d.fog.HDRColorScale", 1)
+	var_0_25(var_6_0, "m_skybox3d.fog.blend", 0)
+
+	local var_6_11 = tonumber(var_0_17[0])
+
+	if var_6_11 ~= var_0_18 then
+		var_0_27()
+
+		var_0_18 = var_6_11
+	end
+end
+
+function var_0_29()
+	var_0_26()
+
+	if not var_0_2.get(var_0_11) then
+		client.unset_event_callback("pre_render", var_0_28)
+		client.unset_event_callback("post_render", var_0_29)
+	end
+end
+
+function var_0_30()
+	var_0_27()
+	client.delay_call(0, var_0_27)
+end
+
+function var_0_31()
+	var_0_27(true)
+end
+
+var_0_2.set_callback(var_0_11, function()
+	local var_10_0 = var_0_2.get(var_0_11)
+
+	if var_10_0 then
+		client.set_event_callback("pre_render", var_0_28)
+		client.set_event_callback("post_render", var_0_29)
+		client.set_event_callback("level_init", var_0_30)
+		client.set_event_callback("shutdown", var_0_31)
+		var_0_2.set(var_0_9, false)
+	else
+		client.unset_event_callback("level_init", var_0_30)
+		client.unset_event_callback("shutdown", var_0_31)
+	end
+
+	var_0_2.set_visible(var_0_13, var_10_0)
+	var_0_2.set_visible(var_0_14, var_10_0)
+	var_0_2.set_visible(var_0_15, var_10_0)
+	var_0_27()
+end)
+
+var_0_2.set_callback(var_0_15, function()
+	var_0_27()
+end)
+
+var_0_2.set_callback(var_0_10, function()
+	var_0_27()
+end)
+
+var_0_2.set_callback(var_0_9, function()
+	if var_0_2.get(var_0_9) then
+		var_0_2.set(var_0_11, false)
+	end
+end)
+
+-- world modulate
+-- bullet sparks
+ffi = require("ffi")
+
+enable = ui.new_checkbox("LUA", "B", "Bullet sparks")
+radius = ui.new_slider("LUA", "B", "Radius", 1, 10, 3)
+length = ui.new_slider("LUA", "B", "Length", 1, 10, 5)
+
+function handle_menu_visibility()
+    local state = ui.get(enable)
+    ui.set_visible(radius, state)
+    ui.set_visible(length, state)
+end
+
+ui.set_callback(enable, handle_menu_visibility)
+handle_menu_visibility()
+
+ffi.cdef[[
+    typedef struct {
+        float x;
+        float y;
+        float z;
+    } Vector_s;
+
+    typedef void(__fastcall* FX_ElectricSparkFn)(const Vector_s*, int, int, const Vector_s*);
+]]
+
+sig = client.find_signature("client.dll", "\x55\x8B\xEC\x83\xEC\x3C\x53\x8B\xD9\x89\x55\xFC\x8B\x0D\xCC\xCC\xCC\xCC\x56\x57")
+
+if sig ~= nil then
+    FX_ElectricSpark = ffi.cast("FX_ElectricSparkFn", sig)
+end
+
+vec3 = ffi.new("Vector_s")
+QAngle = ffi.new("Vector_s")
+QAngle.x, QAngle.y, QAngle.z = 0, 0, 0
+
+client.set_event_callback("bullet_impact", function(e)
+    if not ui.get(enable) or sig == nil then return end
+
+    local lp = entity.get_local_player()
+    local ent = client.userid_to_entindex(e.userid) 
+    
+    if ent ~= lp then 
+        return 
+    end
+
+    vec3.x, vec3.y, vec3.z = e.x, e.y, e.z
+    
+    local r = ui.get(radius)
+    local l = ui.get(length)
+
+    FX_ElectricSpark(vec3, r, l, QAngle)
+end)
+-- bullet sparks
+
+-- enemy chat
+local chat = require "gamesense/chat"
+local localize = require "gamesense/localize"
+
+local main = ui.new_checkbox("LUA", "B", "Reveal enemy teamchat")
+
+local GameStateAPI = panorama.open().GameStateAPI
+
+local lastChatMessage = {}
+
+local function onPlaySay(e)
+	local sender = client.userid_to_entindex(e.userid)
+	if not entity.is_enemy(sender) then return end
+
+	if GameStateAPI.IsSelectedPlayerMuted(GameStateAPI.GetPlayerXuidStringFromEntIndex(sender)) then return end
+
+	client.delay_call(0.2, function()
+		if lastChatMessage[sender] ~= nil and math.abs(globals.realtime() - lastChatMessage[sender]) < 0.4 then
+			return
+		end
+
+
+		local enemyTeamName = entity.get_prop(entity.get_player_resource(), "m_iTeam", sender) == 2 and "T" or "CT"
+
+		local placeName = entity.get_prop(sender, "m_szLastPlaceName")
+		local enemyName = entity.get_player_name(sender)
+		
+		local localizeStr = ("Cstrike_Chat_%s_%s"):format(enemyTeamName, entity.is_alive(sender) and "Loc" or "Dead")
+		local msg = localize(localizeStr, {
+			s1 = enemyName,
+			s2 = e.text,
+			s3 = localize(placeName ~= "" and placeName or "UI_Unknown")
+		})
+
+		chat.print_player(sender, msg)
+	end)
+end
+
+local function onPlayChat(e)
+	if not entity.is_enemy(e.entity) then return end
+	lastChatMessage[e.entity] = globals.realtime()
+end
+
+ui.set_callback(main, function()
+	local update_callback = ui.get(main) and client.set_event_callback or client.unset_event_callback
+	update_callback("player_say", onPlaySay)
+	update_callback("player_chat", onPlayChat)
+end)
+-- enemy chat
+
+-- air stop
+local bit = require 'bit'
+
+local ticks = 0
+
+local feature = {}
+
+feature.air_stop = ui.new_checkbox('LUA', 'B', 'Air Stop')
+feature.air_stop_hotkey = ui.new_hotkey('LUA', 'B', 'Air Stop Key', false)
+
+ui.set_callback(feature.air_stop, function()
+    local enabled = ui.get(feature.air_stop)
+    ui.set_visible(feature.air_stop_hotkey, enabled)
+end)
+ui.set_visible(feature.air_stop_hotkey, ui.get(feature.air_stop))
+
+local ticks = 0
+
+local function airstop(cmd)
+    local lp = entity.get_local_player()
+    if not lp then return end
+    
+    if ui.get(feature.air_stop) then
+        if ui.get(feature.air_stop_hotkey) then
+            if cmd.quick_stop then
+                if (globals.tickcount() - ticks) > 3 then
+                    cmd.in_speed = 1
+                end
+            else
+                ticks = globals.tickcount()
+            end
+        end
+    end
+end
+
+client.set_event_callback("setup_command", function(cmd)
+    if ui.get(feature.air_stop) then
+        airstop(cmd)
+    end
+end)
+
+client.set_event_callback("paint", function()
+    if not entity.is_alive(entity.get_local_player()) then return end
+
+    if ui.get(feature.air_stop) and ui.get(feature.air_stop_hotkey) then
+        renderer.indicator(215, 211, 213, 255, "AIR STOP")
+    end
+end)
+-- air stop
+-- kill voice
+ffi = require('ffi')
+
+voice_loopback = cvar.voice_loopback
+
+utils = { }
+menu_elements = { }
+runtime_elements = { }
+killvoice_list = database.read('killvoice_list') or { }
+
+ffi.cdef([[
+    typedef uint32_t( __thiscall *get_file_attributes_t )( uintptr_t, const char * );
+    typedef uintptr_t( __thiscall *get_mod_address_t )( void *, const char * );
+    typedef uintptr_t( __thiscall *get_proc_address_t )( void *, uintptr_t, const char * );
+    typedef void( __fastcall *voice_record_start_t )( const char *, const char *, const char * );
+]])
+
+menu_elements.callbacks = { }
+
+menu_elements.general_enable = ui.new_checkbox('lua', 'B', 'Enable killvoice')
+
+menu_elements.general_label = ui.new_label('lua', 'B', 'Killvoice file')
+menu_elements.killvoice_file = ui.new_listbox('lua', 'B', 'Select file', killvoice_list)
+menu_elements.error_not_found = ui.new_label('lua', 'B', '\aFF6060FFFile not found!')
+menu_elements.file_name = ui.new_textbox('lua', 'B', 'File name')
+menu_elements.add_button = ui.new_button('lua', 'B', 'Add', function() return menu_elements.callbacks.on_add_button() end)
+menu_elements.remove_button = ui.new_button('lua', 'B', 'Remove', function() return menu_elements.callbacks.on_remove_button() end)
+menu_elements.enable_loopback = ui.new_checkbox('lua', 'B', 'Loopback')
+menu_elements.random_selection = ui.new_checkbox('lua', 'B', 'Random file')
+menu_elements.play_if_assisted = ui.new_checkbox('lua', 'B', 'Play even was assisted')
+menu_elements.killvoice_length = ui.new_slider('lua', 'B', 'Play duration', 0, 10, 1, true, 's')
+menu_elements.play_button = ui.new_button('lua', 'B', 'Test', function() return runtime_elements.play_killvoice() end)
+
+runtime_elements.callbacks = { }
+runtime_elements.voice_end_timestamp = 0
+runtime_elements.processing_killvoice = false
+
+ui.set_visible(menu_elements.general_label, false)
+ui.set_visible(menu_elements.killvoice_file, false)
+ui.set_visible(menu_elements.error_not_found, false)
+ui.set_visible(menu_elements.file_name, false)
+ui.set_visible(menu_elements.add_button, false)
+ui.set_visible(menu_elements.remove_button, false)
+ui.set_visible(menu_elements.enable_loopback, false)
+ui.set_visible(menu_elements.random_selection, false)
+ui.set_visible(menu_elements.play_if_assisted, false)
+ui.set_visible(menu_elements.killvoice_length, false)
+ui.set_visible(menu_elements.play_button, false)
+
+utils.interfaces = { }
+utils.voice_record_start = ffi.cast(
+    'voice_record_start_t',
+    client.find_signature('engine.dll', '\x55\x8B\xEC\x83\xEC\x0C\x83\x3D\xCC\xCC\xCC\xCC\xCC\x56\x57') or error('voice_record_start not found!')
+)
+utils.get_mod_address = client.find_signature('client.dll', '\xC6\x06\x00\xFF\x15\xCC\xCC\xCC\xCC\x50') or error('get_mod_address not found!')
+utils.get_proc_address = client.find_signature('client.dll', '\x50\xFF\x15\xCC\xCC\xCC\xCC\x85\xC0\x0F\x84\xCC\xCC\xCC\xCC\x6A\x00') or error('get_proc_address not found!')
+utils.winapi_bridge = client.find_signature('client.dll', '\x51\xC3') or error('winapi_bridge not found!')
+
+utils.is_file_exists = function(file)
+    get_mod_address = ffi.cast('void***', ffi.cast('char*', utils.get_mod_address) + 5)[0][0]
+    get_proc_address = ffi.cast('void***', ffi.cast('char*', utils.get_proc_address) + 3)[0][0]
+
+    kernel32 = ffi.cast('get_mod_address_t', utils.winapi_bridge)(get_mod_address, 'kernel32.dll')
+    get_file_attributes = ffi.cast('get_proc_address_t', utils.winapi_bridge)(get_proc_address, kernel32, 'GetFileAttributesA')
+
+    return tonumber(ffi.cast('get_file_attributes_t', utils.winapi_bridge)(get_file_attributes, file)) ~= 0xffffffff
+end
+
+utils.table_length = function(T)
+    count = 0
+    for _ in pairs(T) do count = count + 1 end
+    return count
+end
+
+menu_elements.callbacks.on_general_enable = function()
+    general_enable = ui.get(menu_elements.general_enable)
+    
+    ui.set_visible(menu_elements.general_label, general_enable)
+    ui.set_visible(menu_elements.killvoice_file, general_enable)
+    ui.set_visible(menu_elements.file_name, general_enable)
+    ui.set_visible(menu_elements.add_button, general_enable)
+    ui.set_visible(menu_elements.remove_button, general_enable)
+    ui.set_visible(menu_elements.enable_loopback, general_enable)
+    ui.set_visible(menu_elements.random_selection, general_enable)
+    ui.set_visible(menu_elements.play_if_assisted, general_enable)
+    ui.set_visible(menu_elements.killvoice_length, general_enable)
+    ui.set_visible(menu_elements.play_button, general_enable)
+    
+    if not general_enable then
+        ui.set_visible(menu_elements.error_not_found, false)
+    end
+end
+
+menu_elements.callbacks.on_add_button = function()
+    file_name = ui.get(menu_elements.file_name)
+    if file_name == "" then
+        ui.set_visible(menu_elements.error_not_found, true)
+        ui.set(menu_elements.error_not_found, '\aFF6060FFEnter a file name!')
+        return
+    end
+    
+    if not utils.is_file_exists('csgo\\sound\\' .. file_name) then
+        ui.set_visible(menu_elements.error_not_found, true)
+        ui.set(menu_elements.error_not_found, '\aFF6060FFFile "' .. file_name .. '" not found!')
+        return
+    end
+
+    ui.set_visible(menu_elements.error_not_found, false)
+    table.insert(killvoice_list, file_name)
+    ui.update(menu_elements.killvoice_file, killvoice_list)
+    database.write('killvoice_list', killvoice_list)
+    database.flush()
+end
+
+menu_elements.callbacks.on_remove_button = function()
+    if #killvoice_list > 0 then
+        table.remove(killvoice_list, ui.get(menu_elements.killvoice_file) + 1) 
+        ui.update(menu_elements.killvoice_file, killvoice_list)
+        database.write('killvoice_list', killvoice_list)
+        database.flush()
+    end
+end
+
+menu_elements.callbacks.on_killvoice_file = function()
+    ui.set_visible(menu_elements.error_not_found, false)
+    
+    if #killvoice_list > 0 then
+        killvoice_file = killvoice_list[ui.get(menu_elements.killvoice_file) + 1]
+        if not utils.is_file_exists('csgo\\sound\\' .. killvoice_file) then
+            ui.set_visible(menu_elements.error_not_found, true)
+            ui.set(menu_elements.error_not_found, '\aFF6060FFFile "' .. killvoice_file .. '" not found!')
+        end
+    end
+end
+
+menu_elements.callbacks.on_enable_loopback = function()
+    enable_loopback = ui.get(menu_elements.enable_loopback)
+    voice_loopback:set_int(enable_loopback)
+end
+
+runtime_elements.callbacks.on_player_death = function(event_info)
+    -- Проверяем включен ли killvoice
+    if not ui.get(menu_elements.general_enable) then return end
+    if #killvoice_list == 0 then return end
+    
+    if client.userid_to_entindex(event_info.attacker) == entity.get_local_player() then
+        runtime_elements.play_killvoice()
+    elseif ui.get(menu_elements.play_if_assisted) and client.userid_to_entindex(event_info.assister) == entity.get_local_player() then
+        runtime_elements.play_killvoice()
+    end
+end
+
+runtime_elements.callbacks.on_render = function()
+    if not runtime_elements.processing_killvoice then 
+        return 
+    end
+    if globals.realtime() >= runtime_elements.voice_end_timestamp then
+        runtime_elements.processing_killvoice = false
+        voice_loopback:set_int(0)
+        client.exec('-voicerecord')
+    end
+end
+
+runtime_elements.play_killvoice = function()
+    -- Проверяем включен ли killvoice
+    if not ui.get(menu_elements.general_enable) then return end
+    if #killvoice_list == 0 then 
+        ui.set_visible(menu_elements.error_not_found, true)
+        ui.set(menu_elements.error_not_found, '\aFF6060FFNo files in list!')
+        return 
+    end
+    
+    if ui.get(menu_elements.enable_loopback) then
+        voice_loopback:set_int(1)
+    end
+    
+    if ui.get(menu_elements.random_selection) then
+        killvoice_file = killvoice_list[math.random(1, utils.table_length(killvoice_list))]
+        if not utils.is_file_exists('csgo\\sound\\' .. killvoice_file) then
+            ui.set_visible(menu_elements.error_not_found, true)
+            ui.set(menu_elements.error_not_found, '\aFF6060FFFile "' .. killvoice_file .. '" not found!')
+            return
+        end
+        utils.voice_record_start(nil, nil, 'csgo\\sound\\' .. killvoice_file)
+    else
+        if ui.get(menu_elements.killvoice_file) == nil then return end
+        killvoice_file = killvoice_list[ui.get(menu_elements.killvoice_file) + 1]
+        if not utils.is_file_exists('csgo\\sound\\' .. killvoice_file) then
+            ui.set_visible(menu_elements.error_not_found, true)
+            ui.set(menu_elements.error_not_found, '\aFF6060FFFile "' .. killvoice_file .. '" not found!')
+            return
+        end
+        utils.voice_record_start(nil, nil, 'csgo\\sound\\' .. killvoice_file)
+    end
+    runtime_elements.voice_end_timestamp = globals.realtime() + ui.get(menu_elements.killvoice_length)
+    runtime_elements.processing_killvoice = true
+    ui.set_visible(menu_elements.error_not_found, false)
+end
+
+runtime_elements.callbacks.shutdown = function()
+    voice_loopback:set_int(0)
+end
+
+ui.set_callback(menu_elements.general_enable, menu_elements.callbacks.on_general_enable)
+ui.set_callback(menu_elements.enable_loopback, menu_elements.callbacks.on_enable_loopback)
+ui.set_callback(menu_elements.killvoice_file, menu_elements.callbacks.on_killvoice_file)
+
+client.set_event_callback('player_death', runtime_elements.callbacks.on_player_death)
+client.set_event_callback('shutdown', runtime_elements.callbacks.shutdown)
+client.set_event_callback('paint', runtime_elements.callbacks.on_render)
+-- kill voice
+
+
+
+
+
+
+-- Nimbus
+do
+    local tp = { ui.reference("Visuals", "Effects", "Force Third person (alive)") }
+
+    nim_cfg = {
+        enabled  = ui.new_checkbox("LUA", "B", "Nimbus"),
+        simple   = ui.new_checkbox("LUA", "B", "Nimbus Simple mode"),
+        radius   = ui.new_slider("LUA", "B", "Nimbus Radius", 1, 80, 22),
+        tube     = ui.new_slider("LUA", "B", "Tube Radius", 1, 10, 1),
+        height   = ui.new_slider("LUA", "B", "Nimbus Height Offset", -20, 60, 10),
+        mode     = ui.new_combobox("LUA", "B", "Nimbus Color Mode", {"Static", "Rainbow", "Gradient"}),
+        color1   = ui.new_color_picker("LUA", "B", "Nimbus Color", 255, 215, 0, 255),
+        color2   = ui.new_color_picker("LUA", "B", "Nimbus Color 2", 255, 80, 200, 255),
+        speed    = ui.new_slider("LUA", "B", "Nimbus Speed", 1, 20, 5),
+        pulse    = ui.new_checkbox("LUA", "B", "Nimbus Pulse"),
+        pulse_sp = ui.new_slider("LUA", "B", "Pulse Speed", 1, 20, 6),
+    }
+
+    local function refresh()
+        local a = ui.get(nim_cfg.enabled)
+        ui.set_visible(nim_cfg.simple,   a)
+        ui.set_visible(nim_cfg.radius,   a)
+        ui.set_visible(nim_cfg.tube,     a)
+        ui.set_visible(nim_cfg.height,   a)
+        ui.set_visible(nim_cfg.mode,     a)
+        ui.set_visible(nim_cfg.color1,   a)
+        ui.set_visible(nim_cfg.color2,   a)
+        ui.set_visible(nim_cfg.speed,    a)
+        ui.set_visible(nim_cfg.pulse,    a)
+        ui.set_visible(nim_cfg.pulse_sp, a and ui.get(nim_cfg.pulse))
+    end
+
+    ui.set_callback(nim_cfg.enabled, refresh)
+    ui.set_callback(nim_cfg.pulse,   refresh)
+    refresh()
+
+    local w2s   = renderer.world_to_screen
+    local line  = renderer.line
+    local cos   = math.cos
+    local sin   = math.sin
+    local floor = math.floor
+    local max   = math.max
+    local pi2   = math.pi * 2
+
+    local grid = {}
+    for i = 0, 64 do grid[i] = {} end
+
+    local sw, sh = client.screen_size()
+
+    local function fill_tri(x1,y1, x2,y2, x3,y3, r,g,b,a)
+        -- Отсекаем треугольники которые слишком большие (близко к камере)
+        local minx = math.min(x1,x2,x3)
+        local maxx = math.max(x1,x2,x3)
+        local miny = math.min(y1,y2,y3)
+        local maxy = math.max(y1,y2,y3)
+        -- Если треугольник больше четверти экрана — пропускаем
+        if maxx - minx > sw * 0.25 then return end
+        if maxy - miny > sh * 0.25 then return end
+        -- Если треугольник вне экрана — пропускаем
+        if maxx < 0 or minx > sw then return end
+        if maxy < 0 or miny > sh then return end
+
+        if y1 > y2 then x1,y1,x2,y2 = x2,y2,x1,y1 end
+        if y1 > y3 then x1,y1,x3,y3 = x3,y3,x1,y1 end
+        if y2 > y3 then x2,y2,x3,y3 = x3,y3,x2,y2 end
+        y1 = floor(y1)
+        y2 = floor(y2)
+        y3 = floor(y3)
+        local h = y3 - y1
+        if h == 0 then return end
+        for y = y1, y3 do
+            if y >= 0 and y <= sh then
+                local upper = y < y2
+                local seg   = upper and (y2 - y1) or (y3 - y2)
+                if seg == 0 then seg = 1 end
+                local t1 = (y - y1) / h
+                local t2 = upper and ((y - y1) / seg) or ((y - y2) / seg)
+                local xa  = x1 + (x3 - x1) * t1
+                local xb  = upper and (x1 + (x2 - x1) * t2) or (x2 + (x3 - x2) * t2)
+                if xa > xb then xa, xb = xb, xa end
+                -- Клиппинг по X
+                xa = math.max(xa, 0)
+                xb = math.min(xb, sw)
+                if xa < xb then
+                    line(floor(xa), y, floor(xb), y, r, g, b, a)
+                end
+            end
+        end
+    end
+
+    local function get_col(mode, frac, spd, r1,g1,b1,a1, r2,g2,b2,a2)
+        local cr,cg,cb,ca = r1,g1,b1,a1
+        if mode == "Rainbow" then
+            local t  = (globals.curtime() * spd + frac) % 1
+            local ci = t * 6
+            local f  = ci - floor(ci)
+            local q  = 1 - f
+            if     ci < 1 then cr,cg,cb = 255,f*255,0
+            elseif ci < 2 then cr,cg,cb = q*255,255,0
+            elseif ci < 3 then cr,cg,cb = 0,255,f*255
+            elseif ci < 4 then cr,cg,cb = 0,q*255,255
+            elseif ci < 5 then cr,cg,cb = f*255,0,255
+            else            cr,cg,cb = 255,0,q*255 end
+            ca = a1
+        elseif mode == "Gradient" then
+            -- Зеркалим: идёт color1->color2->color1 по кругу без обрыва
+            local t = frac * 2
+            if t > 1 then t = 2 - t end
+            cr = floor(r1+(r2-r1)*t)
+            cg = floor(g1+(g2-g1)*t)
+            cb = floor(b1+(b2-b1)*t)
+            ca = floor(a1+(a2-a1)*t)
+        end
+        return cr,cg,cb,ca
+    end
+
+    client.set_event_callback("paint", function()
+        if not ui.get(nim_cfg.enabled) then return end
+        if not ui.get(tp[1]) or not ui.get(tp[2]) then return end
+
+        local me = entity.get_local_player()
+        if not me or not entity.is_alive(me) then return end
+
+        local hx, hy, hz = entity.hitbox_position(me, 0)
+        if not hx then return end
+
+        local R        = ui.get(nim_cfg.radius)
+        local r        = ui.get(nim_cfg.tube)
+        local height   = ui.get(nim_cfg.height)
+        local mode     = ui.get(nim_cfg.mode)
+        local spd      = ui.get(nim_cfg.speed) * 0.2
+        local do_pulse = ui.get(nim_cfg.pulse)
+        local pulse_sp = ui.get(nim_cfg.pulse_sp) * 0.3
+        local r1,g1,b1,a1 = ui.get(nim_cfg.color1)
+        local r2,g2,b2,a2 = ui.get(nim_cfg.color2)
+        local is_simple   = ui.get(nim_cfg.simple)
+
+        local base_z = hz + height
+
+        local pal
+        if do_pulse then
+            pal = floor(255 * (0.3 + 0.7 * ((sin(globals.curtime() * pulse_sp) + 1) * 0.5)))
+        else
+            pal = 255
+        end
+
+        if is_simple then
+            local sm = max(floor(R * 1.8), 32)
+            for iu = 0, sm - 1 do
+                local u0 = (iu     / sm) * pi2
+                local u1 = ((iu+1) / sm) * pi2
+                local sx1,sy1 = w2s(hx + cos(u0)*R, hy + sin(u0)*R, base_z)
+                local sx2,sy2 = w2s(hx + cos(u1)*R, hy + sin(u1)*R, base_z)
+                if sx1 and sx2 then
+                    local cr,cg,cb,ca = get_col(mode, iu/sm, spd, r1,g1,b1,a1, r2,g2,b2,a2)
+                    for ot = -2, 2 do
+                        line(sx1, sy1+ot, sx2, sy2+ot, cr,cg,cb, pal)
+                    end
+                end
+            end
+            return
+        end
+
+        local sm = max(floor(R * 0.9), 16)
+        local st = max(floor(r  * 1.8), 5)
+
+        local cu_t, su_t = {}, {}
+        for iu = 0, sm do
+            local u = (iu/sm)*pi2
+            cu_t[iu] = cos(u)
+            su_t[iu] = sin(u)
+        end
+        local cv_t, sv_t = {}, {}
+        for iv = 0, st do
+            local v = (iv/st)*pi2
+            cv_t[iv] = cos(v)
+            sv_t[iv] = sin(v)
+        end
+
+        for iu = 0, sm do
+            local cu  = cu_t[iu]
+            local su  = su_t[iu]
+            local row = grid[iu]
+            for iv = 0, st do
+                local rho    = R + r * cv_t[iv]
+                local sx, sy = w2s(
+                    hx + rho * cu,
+                    hy + rho * su,
+                    base_z + r * sv_t[iv]
+                )
+                row[iv] = sx and {sx, sy} or false
+            end
+        end
+
+        for iu = 0, sm - 1 do
+            local frac_u = iu / sm
+            local row0   = grid[iu]
+            local row1   = grid[iu + 1]
+            local cr,cg,cb,ca = get_col(mode, frac_u, spd, r1,g1,b1,a1, r2,g2,b2,a2)
+            ca = pal
+
+            for iv = 0, st - 1 do
+                local A = row0[iv]
+                local B = row1[iv]
+                local C = row0[iv + 1]
+                local D = row1[iv + 1]
+
+                if A and B and C and D then
+                    local ax,ay = A[1],A[2]
+                    local bx,by = B[1],B[2]
+                    local cx,cy = C[1],C[2]
+                    local dx,dy = D[1],D[2]
+
+                    -- Заливка двух треугольников с той же альфой
+                    fill_tri(ax,ay, bx,by, dx,dy, cr,cg,cb, ca)
+                    fill_tri(ax,ay, cx,cy, dx,dy, cr,cg,cb, ca)
+                end
+            end
+        end
+    end)
+end
+-- Nimbus
+
+
+-- крутецкое есп
+do
+    local scn = {
+        enabled = ui.new_checkbox("LUA", "B", "Mr Robot ESP haker topchik"),
+    }
+
+    local floor  = math.floor
+    local random = math.random
+    local sin    = math.sin
+    local format = string.format
+
+    local player_data = {}
+
+    local labels = {
+        "rx","ry","rz","vx","vy","vz","dst","vel",
+        "ang","lat","lon","spd","alt","hdg","pit","yaw",
+        "sig","frq","pwr","tmp","mem","cpu","net","pkt",
+    }
+
+    -- Зоны тела относительно bounding box (0..1)
+    local body_zones = {
+        -- Весь игрок
+        function(x1,y1,x2,y2)
+            return {{x1,y1,x2,y2}}
+        end,
+        -- Только голова (верхние 20%)
+        function(x1,y1,x2,y2)
+            local bh = y2-y1
+            return {{x1, y1, x2, y1+floor(bh*0.2)}}
+        end,
+        -- Голова + руки (верх 20% + боковые полосы середины)
+        function(x1,y1,x2,y2)
+            local bh = y2-y1
+            local bw = x2-x1
+            return {
+                {x1, y1, x2, y1+floor(bh*0.2)},
+                {x1, y1+floor(bh*0.25), x1+floor(bw*0.25), y1+floor(bh*0.6)},
+                {x2-floor(bw*0.25), y1+floor(bh*0.25), x2, y1+floor(bh*0.6)},
+            }
+        end,
+        -- Торс (середина 40%)
+        function(x1,y1,x2,y2)
+            local bh = y2-y1
+            return {{x1, y1+floor(bh*0.2), x2, y1+floor(bh*0.6)}}
+        end,
+        -- Ноги (нижние 40%)
+        function(x1,y1,x2,y2)
+            local bh = y2-y1
+            local bw = x2-x1
+            return {
+                {x1,            y1+floor(bh*0.6), x1+floor(bw*0.45), y2},
+                {x2-floor(bw*0.45), y1+floor(bh*0.6), x2,            y2},
+            }
+        end,
+        -- Торс + ноги
+        function(x1,y1,x2,y2)
+            local bh = y2-y1
+            return {{x1, y1+floor(bh*0.2), x2, y2}}
+        end,
+        -- Голова + торс
+        function(x1,y1,x2,y2)
+            local bh = y2-y1
+            return {{x1, y1, x2, y1+floor(bh*0.6)}}
+        end,
+    }
+
+    client.set_event_callback("paint", function()
+        if not ui.get(scn.enabled) then return end
+
+        local me = entity.get_local_player()
+        if not me then return end
+
+        local w, h = client.screen_size()
+        local t    = globals.realtime()
+        local ft   = globals.frametime()
+
+        local cx = floor(w / 2)
+        local cy = h
+
+        local players = entity.get_players()
+
+        for i = 1, #players do
+            local p = players[i]
+            if p ~= me and not entity.is_dormant(p) and entity.is_alive(p) then
+                local x1,y1,x2,y2,alpha = entity.get_bounding_box(p)
+                if x1 and alpha > 0 then
+                    local fa = floor(255 * alpha)
+
+                    local pcx = floor((x1+x2)/2)
+                    local pcy = floor((y1+y2)/2)
+
+                    if not player_data[p] then
+                        player_data[p] = {
+                            zone_idx   = 1,
+                            zone_timer = 0,
+                            readouts   = {},
+                            read_timer = 0,
+                        }
+                        -- Генерим readouts
+                        for j = 1, 6 do
+                            player_data[p].readouts[j] = {
+                                label = labels[random(1,#labels)],
+                                value = format("%.2f", random()*200-100),
+                            }
+                        end
+                    end
+
+                    local pd = player_data[p]
+
+                    -- Очень быстрая смена зон тела (каждые 0.06 сек)
+                    pd.zone_timer = pd.zone_timer - ft
+                    if pd.zone_timer <= 0 then
+                        pd.zone_timer = 0.06 + random() * 0.04
+                        pd.zone_idx   = random(1, #body_zones)
+                    end
+
+                    -- Очень быстрая смена чисел (каждые 0.05 сек)
+                    pd.read_timer = pd.read_timer - ft
+                    if pd.read_timer <= 0 then
+                        pd.read_timer = 0.05
+                        for j = 1, #pd.readouts do
+                            if random() < 0.7 then
+                                pd.readouts[j].label = labels[random(1,#labels)]
+                                pd.readouts[j].value = format("%.2f", random()*200-100)
+                            end
+                        end
+                    end
+
+                    -- Линия от низа экрана до игрока
+                    renderer.line(cx, cy, pcx, pcy, 255,255,255, floor(fa*0.4))
+
+                    -- Пунктир поверх
+                    for s = 0, 7 do
+                        local t0 = s / 8
+                        local t1 = (s+0.4) / 8
+                        renderer.line(
+                            floor(cx+(pcx-cx)*t0), floor(cy+(pcy-cy)*t0),
+                            floor(cx+(pcx-cx)*t1), floor(cy+(pcy-cy)*t1),
+                            255,255,255, floor(fa*0.2)
+                        )
+                    end
+
+                    -- Зоны тела — рисуем текущие квадраты
+                    local zones = body_zones[pd.zone_idx](x1,y1,x2,y2)
+                    for zi = 1, #zones do
+                        local z   = zones[zi]
+                        local zx1 = z[1]; local zy1 = z[2]
+                        local zx2 = z[3]; local zy2 = z[4]
+                        local zfa = fa
+
+                        renderer.line(zx1,zy1, zx2,zy1, 255,255,255,zfa)
+                        renderer.line(zx1,zy2, zx2,zy2, 255,255,255,zfa)
+                        renderer.line(zx1,zy1, zx1,zy2, 255,255,255,zfa)
+                        renderer.line(zx2,zy1, zx2,zy2, 255,255,255,zfa)
+
+                        -- Диагонали внутри зоны
+                        renderer.line(zx1,zy1, zx2,zy2, 255,255,255,floor(zfa*0.3))
+                        renderer.line(zx2,zy1, zx1,zy2, 255,255,255,floor(zfa*0.3))
+
+                        -- Центральный крест
+                        local zmx = floor((zx1+zx2)/2)
+                        local zmy = floor((zy1+zy2)/2)
+                        renderer.line(zx1,zmy, zx2,zmy, 255,255,255,floor(zfa*0.4))
+                        renderer.line(zmx,zy1, zmx,zy2, 255,255,255,floor(zfa*0.4))
+                    end
+
+                    -- Надписи слева
+                    local rx_off = x1 - 58
+                    for j = 1, #pd.readouts do
+                        local ro  = pd.readouts[j]
+                        local ry  = y1 + (j-1)*11
+                        local txt = ro.label .. "=" .. ro.value
+                        renderer.rectangle(rx_off-2, ry-1, 56, 9, 0,0,0, floor(fa*0.3))
+                        renderer.text(rx_off, ry, 255,255,255, fa*0.7, "", 0, txt)
+                    end
+
+                    -- Имя + TGT
+                    local name = entity.get_player_name(p)
+                    renderer.text(x1, y1-18, 255,255,255, fa, "", 0, ">> "..name)
+                    renderer.text(x1, y1-9,  255,255,255, floor(fa*0.6), "", 0,
+                        format("TGT_%03d LOCK", i))
+                end
+            end
+        end
+
+        for p,_ in pairs(player_data) do
+            if not entity.is_alive(p) or entity.is_dormant(p) then
+                player_data[p] = nil
+            end
+        end
+    end)
+
+    client.set_event_callback("level_init", function() player_data = {} end)
+end
+-- крутецкое есп
+
+
+
+
+
+
+-- Velocity Meter
+local surface = require("gamesense/surface")
+    local vel_font = surface.create_font("Arial", 28, 800, {0x010})
+
+do
+    local vel = {
+        enabled = ui.new_checkbox("LUA", "B", "Velocity Meter"),
+        x       = ui.new_slider("LUA", "B", "Vel X pos", 0, 100, 50),
+        y       = ui.new_slider("LUA", "B", "Vel Y pos", 0, 100, 90),
+    }
+
+    local function refresh()
+        local a = ui.get(vel.enabled)
+        ui.set_visible(vel.x, a)
+        ui.set_visible(vel.y, a)
+    end
+    ui.set_callback(vel.enabled, refresh)
+    refresh()
+
+    local floor  = math.floor
+    local sin    = math.sin
+    local cos    = math.cos
+    local sqrt   = math.sqrt
+    local min    = math.min
+    local max    = math.max
+    local format = string.format
+    local pi     = math.pi
+
+    local smooth_vel  = 0
+    local peak_vel    = 0
+    local peak_timer  = 0
+    local flash_timer = 0
+    local prev_vel    = 0
+
+    client.set_event_callback("paint", function()
+        if not ui.get(vel.enabled) then return end
+
+        local me = entity.get_local_player()
+        if not me or not entity.is_alive(me) then return end
+
+        local vx, vy, vz = entity.get_prop(me, "m_vecVelocity")
+        if not vx then return end
+
+        local w, h  = client.screen_size()
+        local ft    = globals.frametime()
+        local t     = globals.realtime()
+
+        local speed = sqrt(vx*vx + vy*vy)
+        local xpos  = floor(w * ui.get(vel.x) / 100)
+        local ypos  = floor(h * ui.get(vel.y) / 100)
+
+        -- Плавное значение
+        smooth_vel = smooth_vel + (speed - smooth_vel) * min(ft * 12, 1)
+
+        -- Пиковая скорость
+        if speed > peak_vel then
+            peak_vel   = speed
+            peak_timer = 2.0
+            flash_timer = 0.15
+        end
+        peak_timer = peak_timer - ft
+        if peak_timer <= 0 then
+            peak_vel = max(peak_vel - ft * 80, smooth_vel)
+        end
+        flash_timer = max(flash_timer - ft, 0)
+
+        -- Вспышка при ускорении
+        local accel = speed - prev_vel
+        prev_vel    = speed
+        local boost = accel > 30
+
+        -- Параметры спидометра
+        local radius    = 70
+        local thickness = 6
+        local max_speed = 320
+        local segments  = 120
+
+        -- Цвет в зависимости от скорости
+        local frac = min(smooth_vel / max_speed, 1)
+        local sr, sg, sb
+        if frac < 0.5 then
+            local f = frac * 2
+            sr = floor(0   + f * 255)
+            sg = floor(255 - f * 55)
+            sb = floor(255 - f * 255)
+        else
+            local f = (frac - 0.5) * 2
+            sr = 255
+            sg = floor(200 - f * 200)
+            sb = 0
+        end
+
+        -- Фон круга
+        renderer.circle(xpos, ypos, radius + 10, 0, 0, 0, 120)
+        renderer.circle(xpos, ypos, radius + 8,  10, 10, 20, 180)
+
+        -- Дуга фона (серая)
+        local start_angle = 150
+        local end_angle   = 390
+        local arc_range   = end_angle - start_angle
+
+        for s = 0, segments do
+            local a0 = start_angle + (s     / segments) * arc_range
+            local a1 = start_angle + ((s+1) / segments) * arc_range
+            local r0 = math.rad(a0)
+            local r1 = math.rad(a1)
+
+            for th = 0, thickness do
+                local ri = radius - th
+                local x0s = xpos + floor(cos(r0) * ri)
+                local y0s = ypos + floor(sin(r0) * ri)
+                local x1s = xpos + floor(cos(r1) * ri)
+                local y1s = ypos + floor(sin(r1) * ri)
+                renderer.line(x0s, y0s, x1s, y1s, 30, 30, 40, 200)
+            end
+        end
+
+        -- Дуга скорости (цветная)
+        local speed_segs = floor(segments * frac)
+        for s = 0, speed_segs do
+            local sf   = s / segments
+            local a0   = start_angle + sf * arc_range
+            local a1   = start_angle + ((s+1)/segments) * arc_range
+            local r0   = math.rad(a0)
+            local r1   = math.rad(a1)
+
+            -- Цвет градиент вдоль дуги
+            local cf   = sf / max(frac, 0.01)
+            local lr, lg, lb
+            if cf < 0.5 then
+                local f = cf * 2
+                lr = floor(f * 255)
+                lg = floor(255 - f * 55)
+                lb = floor(255 - f * 255)
+            else
+                local f = (cf-0.5)*2
+                lr = 255
+                lg = floor(200 - f*200)
+                lb = 0
+            end
+
+            -- Свечение (более толстое и прозрачное)
+            for th = 0, thickness + 4 do
+                local ri    = radius - th + 2
+                local glow_a = floor(180 * (1 - th/(thickness+4)))
+                if th <= thickness then glow_a = 230 end
+                local x0s = xpos + floor(cos(r0) * ri)
+                local y0s = ypos + floor(sin(r0) * ri)
+                local x1s = xpos + floor(cos(r1) * ri)
+                local y1s = ypos + floor(sin(r1) * ri)
+                renderer.line(x0s, y0s, x1s, y1s, lr, lg, lb, glow_a)
+            end
+        end
+
+        -- Пиковая отметка
+        if peak_vel > 10 then
+            local peak_frac = min(peak_vel / max_speed, 1)
+            local pa = start_angle + peak_frac * arc_range
+            local pr = math.rad(pa)
+            for th = 0, thickness + 2 do
+                local ri = radius - th + 2
+                local px0 = xpos + floor(cos(pr) * ri)
+                local py0 = ypos + floor(sin(pr) * ri)
+                local px1 = xpos + floor(cos(pr) * (ri - 3))
+                local py1 = ypos + floor(sin(pr) * (ri - 3))
+                renderer.line(px0, py0, px1, py1, 255, 255, 255, 200)
+            end
+        end
+
+        -- Центральное число (скорость)
+        local spd_text = format("%d", floor(speed))
+        local flash_a  = flash_timer > 0 and 255 or floor(200 + sin(t*3)*30)
+
+        -- Тень текста
+        local tw, th = surface.get_text_size(vel_font, spd_text)
+        surface.draw_text(xpos - floor(tw/2) + 1, ypos - floor(th/2) - 14, 0,0,0, 200, vel_font, spd_text)
+        surface.draw_text(xpos - floor(tw/2),     ypos - floor(th/2) - 15, sr,sg,sb, flash_a, vel_font, spd_text)
+
+        -- Единица
+        renderer.text(xpos+1, ypos+4+1, 0,0,0, 150, "c", 0, "u/s")
+        renderer.text(xpos,   ypos+4,   200,200,200, 150, "c", 0, "u/s")
+
+        -- Пиковое значение
+        if peak_vel > 10 then
+            local pk_text = format("MAX %d", floor(peak_vel))
+            renderer.text(xpos, ypos+22, 255,255,255, 120, "c", 0, pk_text)
+        end
+
+        -- Буст подсветка
+        if boost and accel > 50 then
+            renderer.text(xpos, ypos-30, sr,sg,sb, floor(flash_a*0.8), "c", 0, "BOOST!")
+        end
+
+        -- BHop индикатор — показывает есть ли идеальный бхоп
+        local on_ground = entity.get_prop(me, "m_fFlags")
+        if on_ground and bit.band(on_ground, 1) == 0 and speed > 250 then
+            renderer.circle(xpos, ypos + radius + 18, 4, sr, sg, sb, 200)
+            renderer.text(xpos, ypos + radius + 25, sr,sg,sb, 180, "c", 0, "AIR")
+        end
+    end)
+end
+-- Velocity Meter
+
+
+
+
+-- Combo Counter
+do
+    local combo = {
+        enabled = ui.new_checkbox("LUA", "B", "Combo Counter"),
+        x       = ui.new_slider("LUA", "B", "Combo X", 0, 100, 50),
+        y       = ui.new_slider("LUA", "B", "Combo Y", 0, 100, 45),
+    }
+
+    ui.set_callback(combo.enabled, function() end)
+
+    local surface = require("gamesense/surface")
+    local floor   = math.floor
+    local sin     = math.sin
+    local format  = string.format
+
+    local font_big  = surface.create_font("Arial", 36, 800, {0x010})
+    local font_med  = surface.create_font("Arial", 18, 700, {0x010})
+    local font_kill = surface.create_font("Arial", 22, 700, {0x010})
+
+    local count       = 0
+    local best        = 0
+    local anim_scale  = 0
+    local fade_timer  = 0
+    local kill_popups = {}
+    local shake_x     = 0
+    local shake_y     = 0
+    local shake_timer = 0
+
+    -- Позиция (драг)
+    local pos_x     = nil
+    local pos_y     = nil
+    local dragging  = false
+    local drag_off_x = 0
+    local drag_off_y = 0
+
+    local fw_base = 240
+    local fh_base = 90
+
+    local combo_names = {
+        [1] = "FIRST BLOOD",
+        [2] = "DOUBLE KILL",
+        [3] = "TRIPLE KILL",
+        [4] = "QUAD KILL",
+        [5] = "RAMPAGE!!!",
+        [6] = "GODLIKE",
+        [7] = "HOLY SHIT!!!",
+    }
+
+    local combo_colors = {
+        [1] = {200, 200, 200},
+        [2] = {100, 220, 100},
+        [3] = {100, 180, 255},
+        [4] = {255, 180,  50},
+        [5] = {255,  30,  30},
+        [6] = {200,   0, 255},
+        [7] = {255, 100,   0},
+    }
+
+    local function get_combo_color(n)
+        local c = combo_colors[math.min(n, 7)] or {255,255,255}
+        return c[1], c[2], c[3]
+    end
+
+    local function get_combo_name(n)
+        return combo_names[math.min(n, 7)] or "HOLY SHIT!!!"
+    end
+
+    client.set_event_callback("aim_hit", function(e)
+        if not ui.get(combo.enabled) then return end
+        local hp = entity.get_prop(e.target, "m_iHealth") or 0
+        if hp > 0 then return end
+
+        count       = count + 1
+        best        = math.max(best, count)
+        anim_scale  = 1.5
+        fade_timer  = 4.0
+        shake_x     = math.random(-5, 5)
+        shake_y     = math.random(-5, 5)
+        shake_timer = 0.15
+
+        local name = entity.get_player_name(e.target) or "enemy"
+        table.insert(kill_popups, {
+            text  = "+ KILL  " .. name .. "  [" .. e.damage .. " dmg]",
+            life  = 2.0,
+            y_off = 0,
+        })
+    end)
+
+    client.set_event_callback("round_start", function()
+        count       = 0
+        fade_timer  = 0
+        kill_popups = {}
+    end)
+
+    client.set_event_callback("paint", function()
+        if not ui.get(combo.enabled) then return end
+
+        local w, h = client.screen_size()
+        local t    = globals.realtime()
+        local ft   = globals.frametime()
+
+        pos_x = floor(w * ui.get(combo.x) / 100)
+        pos_y = floor(h * ui.get(combo.y) / 100)
+
+        -- Таймеры
+        fade_timer  = math.max(fade_timer  - ft, 0)
+        shake_timer = math.max(shake_timer - ft, 0)
+        anim_scale  = anim_scale + (1.0 - anim_scale) * math.min(ft * 14, 1)
+
+        if shake_timer <= 0 then
+            shake_x = floor(shake_x * 0.6)
+            shake_y = floor(shake_y * 0.6)
+        end
+
+        local is_rampage = count >= 5
+        local fw = is_rampage and 300 or fw_base
+        local fh = is_rampage and 110 or fh_base
+
+        local sx = pos_x + shake_x
+        local sy = pos_y + shake_y
+
+        -- Драг мышкой
+        local cur = client.cursor_position and client.cursor_position() or nil
+        local mx  = cur and cur[1] or 0
+        local my  = cur and cur[2] or 0
+        local in_box  = mx >= pos_x - fw/2 and mx <= pos_x + fw/2
+                     and my >= pos_y - fh/2 and my <= pos_y + fh/2
+
+        -- Клик (кнопка 0 = левая мышь через client)
+        if in_box and ui.is_menu_open() then
+            if not dragging then
+                dragging  = true
+                drag_off_x = pos_x - mx
+                drag_off_y = pos_y - my
+            end
+        end
+
+        if dragging then
+            if ui.is_menu_open() then
+                pos_x = mx + drag_off_x
+                pos_y = my + drag_off_y
+                -- Клампим к экрану
+                pos_x = math.max(fw/2, math.min(w - fw/2, pos_x))
+                pos_y = math.max(fh/2, math.min(h - fh/2, pos_y))
+            else
+                dragging = false
+            end
+        end
+
+        -- Подсказка что можно двигать
+        if ui.is_menu_open() then
+            renderer.text(pos_x, pos_y + fh/2 + 14, 150,150,150, 180, "c", 0, "[ drag to move ]")
+            -- Рамка при наведении
+            if in_box then
+                renderer.line(pos_x-fw/2, pos_y-fh/2, pos_x+fw/2, pos_y-fh/2, 255,255,255, 80)
+                renderer.line(pos_x-fw/2, pos_y+fh/2, pos_x+fw/2, pos_y+fh/2, 255,255,255, 80)
+                renderer.line(pos_x-fw/2, pos_y-fh/2, pos_x-fw/2, pos_y+fh/2, 255,255,255, 80)
+                renderer.line(pos_x+fw/2, pos_y-fh/2, pos_x+fw/2, pos_y+fh/2, 255,255,255, 80)
+            end
+        end
+
+        if count > 0 and fade_timer > 0 then
+            local cr, cg, cb = get_combo_color(count)
+            local cname      = get_combo_name(count)
+
+            local alpha = 255
+            if fade_timer < 1.0 then
+                alpha = floor(255 * fade_timer)
+            end
+
+            local pulse = (sin(t * 6) + 1) * 0.5
+            local pr    = floor(cr * (0.8 + 0.2 * pulse))
+            local pg    = floor(cg * (0.8 + 0.2 * pulse))
+            local pb    = floor(cb * (0.8 + 0.2 * pulse))
+
+            -- Рампага — внешнее свечение
+            if is_rampage then
+                local gp = floor((sin(t*8)+1)*0.5*25)
+                renderer.rectangle(sx-fw/2-6, sy-fh/2-6, fw+12, fh+12, pr,pg,pb, floor(alpha*0.15)+gp)
+                renderer.rectangle(sx-fw/2-3, sy-fh/2-3, fw+6,  fh+6,  pr,pg,pb, floor(alpha*0.25)+gp)
+            end
+
+            -- Фон
+            renderer.rectangle(sx-fw/2-1, sy-fh/2-1, fw+2, fh+2, pr,pg,pb, floor(alpha*0.3))
+            renderer.rectangle(sx-fw/2,   sy-fh/2,   fw,   fh,   0,0,0,     floor(alpha*0.75))
+
+            -- Боковые полосы
+            renderer.rectangle(sx-fw/2,     sy-fh/2, 3, fh, pr,pg,pb, alpha)
+            renderer.rectangle(sx+fw/2-3,   sy-fh/2, 3, fh, pr,pg,pb, alpha)
+
+            -- Счётчик
+            local count_txt  = count .. "x"
+            local tw, th     = surface.get_text_size(font_big, count_txt)
+            surface.draw_text(sx-floor(tw/2)+2, sy-fh/2+10+2, 0,0,0,  floor(alpha*0.8), font_big, count_txt)
+            surface.draw_text(sx-floor(tw/2),   sy-fh/2+10,   pr,pg,pb, alpha,            font_big, count_txt)
+
+            -- Название
+            local nw, _ = surface.get_text_size(font_med, cname)
+            surface.draw_text(sx-floor(nw/2)+1, sy+14+1, 0,0,0,  floor(alpha*0.8), font_med, cname)
+            surface.draw_text(sx-floor(nw/2),   sy+14,   pr,pg,pb, alpha,            font_med, cname)
+
+            -- Рекорд
+            if best > 1 then
+                local bt    = "BEST: " .. best .. "x"
+                local bw2,_ = surface.get_text_size(font_med, bt)
+                surface.draw_text(sx-floor(bw2/2), sy+fh/2+6, 150,150,150, floor(alpha*0.7), font_med, bt)
+            end
+
+            -- Полоска таймера снизу
+            local line_w = floor(fw * math.min(fade_timer/4.0, 1))
+            renderer.rectangle(sx-line_w/2, sy+fh/2-3, line_w, 2, pr,pg,pb, alpha)
+        end
+
+        -- Kill попапы
+        for i = #kill_popups, 1, -1 do
+            local kp = kill_popups[i]
+            kp.life  = kp.life - ft
+            kp.y_off = kp.y_off - ft * 35
+
+            if kp.life <= 0 then
+                table.remove(kill_popups, i)
+            else
+                local ka    = floor(255 * math.min(kp.life, 1))
+                local ktw,_ = surface.get_text_size(font_kill, kp.text)
+                local kx    = pos_x - floor(ktw/2)
+                local ky    = pos_y - fh_base/2 - 30 + floor(kp.y_off)
+                local cr,cg,cb = get_combo_color(count)
+
+                renderer.rectangle(kx-4, ky-2, ktw+8, 20, 0,0,0, floor(ka*0.6))
+                surface.draw_text(kx+1, ky+1, 0,0,0,    floor(ka*0.8), font_kill, kp.text)
+                surface.draw_text(kx,   ky,   cr,cg,cb,  ka,            font_kill, kp.text)
+            end
+        end
+    end)
+end
+-- Combo Counter
+
+ui.new_label("LUA", "B", "=== [PasteSense] ===")
+
+
+
+-- Config System
+local json = require("json")
+
+
+do
+    local ps_cfg_list = database.read("ps_cfg_list") or {}
+
+    ui.new_label("LUA", "B", "=== [Configs] ===")
+    local cfg_name = ui.new_textbox("LUA", "B", "Config name")
+    local cfg_list = ui.new_listbox("LUA", "B", "Saved configs", ps_cfg_list)
+
+    local function set(ref, val)
+        if ref ~= nil and val ~= nil then
+            pcall(ui.set, ref, val)
+        end
+    end
+
+    local function setc(ref, val)
+        if ref ~= nil and val ~= nil then
+            pcall(ui.set, ref, table.unpack(val))
+        end
+    end
+
+    local function collect()
+        local d = {}
+
+        -- Thirdperson distance
+        d.tp_dist = ui.get(tpdistanceslider)
+
+        -- Aspect ratio
+        d.aspect = ui.get(aspect_ratio_reference)
+
+        -- Pixel ESP
+        d.px_on      = ui.get(custom_esp_enabled_px)
+        d.px_col     = { ui.get(esp_color_px) }
+        d.px_hp_on   = ui.get(static_hp_enabled_px)
+        d.px_hp_col  = { ui.get(static_hp_color_px) }
+
+        -- Bullet tracers
+        d.tr_on    = ui.get(tracer)
+        d.tr_col   = { ui.get(color_picker) }
+        d.tr_dur   = ui.get(duration_slider)
+        d.tr_thick = ui.get(thickness_slider)
+
+        -- Viewmodel
+        d.vm_on  = ui.get(viewmodel_changer)
+        d.vm_fov = ui.get(viewmodel_fov)
+        d.vm_x   = ui.get(viewmodel_offset_x)
+        d.vm_y   = ui.get(viewmodel_offset_y)
+        d.vm_z   = ui.get(viewmodel_offset_z)
+
+        -- Autobuy
+        d.buy_on      = ui.get(buybot_enabled)
+        d.buy_primary = ui.get(buybot_primary)
+        d.buy_pistol  = ui.get(buybot_pistol)
+        d.buy_gear    = ui.get(buybot_gear)
+
+        -- Hitlog
+        d.hl_on      = ui.get(enabled)
+        d.hl_con     = ui.get(console_logs)
+        d.hl_prefix  = { ui.get(prefix_color) }
+        d.hl_hit     = { ui.get(hit_color) }
+        d.hl_miss    = { ui.get(miss_color) }
+
+        -- Hitsound
+        d.hs_on   = ui.get(enabled_hit)
+        d.hs_path = ui.get(sound_path)
+
+        -- World visuals
+        d.wv_on       = ui.get(master_switch)
+        d.wv_bloom    = ui.get(bloom_reference)
+        d.wv_exposure = ui.get(exposure_reference)
+        d.wv_ambient  = ui.get(model_ambient_min_reference)
+
+        -- Fog
+        d.fog_on     = ui.get(var_0_11)
+        d.fog_col    = { ui.get(var_0_12) }
+        d.fog_start  = ui.get(var_0_13)
+        d.fog_end    = ui.get(var_0_14)
+        d.fog_sky    = ui.get(var_0_15)
+
+        -- Bullet sparks
+        d.sp_on  = ui.get(enable)
+        d.sp_rad = ui.get(radius)
+        d.sp_len = ui.get(length)
+
+        -- Killvoice
+        d.kv_on       = ui.get(menu_elements.general_enable)
+        d.kv_loopback = ui.get(menu_elements.enable_loopback)
+        d.kv_random   = ui.get(menu_elements.random_selection)
+        d.kv_assisted = ui.get(menu_elements.play_if_assisted)
+        d.kv_length   = ui.get(menu_elements.killvoice_length)
+
+        -- Nimbus
+        if nim_cfg then
+            d.nim_on      = ui.get(nim_cfg.enabled)
+            d.nim_radius  = ui.get(nim_cfg.radius)
+            d.nim_tube    = ui.get(nim_cfg.tube)
+            d.nim_height  = ui.get(nim_cfg.height)
+            d.nim_segm    = ui.get(nim_cfg.seg_main)
+            d.nim_segt    = ui.get(nim_cfg.seg_tube)
+            d.nim_fill    = ui.get(nim_cfg.fill)
+            d.nim_mode    = ui.get(nim_cfg.mode)
+            d.nim_speed   = ui.get(nim_cfg.speed)
+            d.nim_pulse   = ui.get(nim_cfg.pulse)
+            d.nim_pulsesp = ui.get(nim_cfg.pulse_sp)
+            d.nim_col1    = { ui.get(nim_cfg.color1) }
+            d.nim_col2    = { ui.get(nim_cfg.color2) }
+        end
+
+        return d
+    end
+
+    local function apply(d)
+        if not d then return end
+
+        set(tpdistanceslider,       d.tp_dist)
+        set(aspect_ratio_reference, d.aspect)
+
+        set(custom_esp_enabled_px,  d.px_on)
+        setc(esp_color_px,          d.px_col)
+        set(static_hp_enabled_px,   d.px_hp_on)
+        setc(static_hp_color_px,    d.px_hp_col)
+
+        set(tracer,           d.tr_on)
+        setc(color_picker,    d.tr_col)
+        set(duration_slider,  d.tr_dur)
+        set(thickness_slider, d.tr_thick)
+
+        set(viewmodel_changer,   d.vm_on)
+        set(viewmodel_fov,       d.vm_fov)
+        set(viewmodel_offset_x,  d.vm_x)
+        set(viewmodel_offset_y,  d.vm_y)
+        set(viewmodel_offset_z,  d.vm_z)
+
+        set(buybot_enabled, d.buy_on)
+        set(buybot_primary, d.buy_primary)
+        set(buybot_pistol,  d.buy_pistol)
+        if d.buy_gear then set(buybot_gear, d.buy_gear) end
+
+        set(enabled,      d.hl_on)
+        set(console_logs, d.hl_con)
+        setc(prefix_color, d.hl_prefix)
+        setc(hit_color,    d.hl_hit)
+        setc(miss_color,   d.hl_miss)
+
+        set(enabled_hit, d.hs_on)
+        set(sound_path,  d.hs_path)
+
+        set(master_switch,              d.wv_on)
+        set(bloom_reference,            d.wv_bloom)
+        set(exposure_reference,         d.wv_exposure)
+        set(model_ambient_min_reference, d.wv_ambient)
+
+        set(var_0_11,  d.fog_on)
+        setc(var_0_12, d.fog_col)
+        set(var_0_13,  d.fog_start)
+        set(var_0_14,  d.fog_end)
+        set(var_0_15,  d.fog_sky)
+
+        set(enable, d.sp_on)
+        set(radius, d.sp_rad)
+        set(length, d.sp_len)
+
+        set(menu_elements.general_enable,  d.kv_on)
+        set(menu_elements.enable_loopback, d.kv_loopback)
+        set(menu_elements.random_selection, d.kv_random)
+        set(menu_elements.play_if_assisted, d.kv_assisted)
+        set(menu_elements.killvoice_length, d.kv_length)
+
+        if nim_cfg then
+            set(nim_cfg.enabled,  d.nim_on)
+            set(nim_cfg.radius,   d.nim_radius)
+            set(nim_cfg.tube,     d.nim_tube)
+            set(nim_cfg.height,   d.nim_height)
+            set(nim_cfg.seg_main, d.nim_segm)
+            set(nim_cfg.seg_tube, d.nim_segt)
+            set(nim_cfg.fill,     d.nim_fill)
+            set(nim_cfg.mode,     d.nim_mode)
+            set(nim_cfg.speed,    d.nim_speed)
+            set(nim_cfg.pulse,    d.nim_pulse)
+            set(nim_cfg.pulse_sp, d.nim_pulsesp)
+            setc(nim_cfg.color1,  d.nim_col1)
+            setc(nim_cfg.color2,  d.nim_col2)
+        end
+    end
+
+    ui.new_button("LUA", "B", "Save config", function()
+        local name = ui.get(cfg_name)
+        if not name or name == "" then
+            client.log("[PasteSense] Enter config name!")
+            return
+        end
+
+        database.write("ps_cfg_" .. name, collect())
+
+        local found = false
+        for i = 1, #ps_cfg_list do
+            if ps_cfg_list[i] == name then found = true; break end
+        end
+        if not found then
+            table.insert(ps_cfg_list, name)
+            database.write("ps_cfg_list", ps_cfg_list)
+            ui.update(cfg_list, ps_cfg_list)
+        end
+
+        database.flush()
+        client.log("[PasteSense] Config '" .. name .. "' saved!")
+    end)
+
+    ui.new_button("LUA", "B", "Load config", function()
+        local idx = ui.get(cfg_list)
+        if idx == nil or ps_cfg_list[idx + 1] == nil then
+            client.log("[PasteSense] Select a config!")
+            return
+        end
+        local name = ps_cfg_list[idx + 1]
+        local data = database.read("ps_cfg_" .. name)
+        if not data then
+            client.log("[PasteSense] Config '" .. name .. "' not found!")
+            return
+        end
+        apply(data)
+        client.log("[PasteSense] Config '" .. name .. "' loaded!")
+    end)
+
+    ui.new_button("LUA", "B", "Delete config", function()
+        local idx = ui.get(cfg_list)
+        if idx == nil or ps_cfg_list[idx + 1] == nil then
+            client.log("[PasteSense] Select a config!")
+            return
+        end
+        local name = ps_cfg_list[idx + 1]
+        database.write("ps_cfg_" .. name, nil)
+        table.remove(ps_cfg_list, idx + 1)
+        database.write("ps_cfg_list", ps_cfg_list)
+        ui.update(cfg_list, ps_cfg_list)
+        database.flush()
+        client.log("[PasteSense] Config '" .. name .. "' deleted!")
+    end)
+
+local function json_encode(table)
+    return panorama.loadstring([[
+        return JSON.stringify(]] .. panorama.loadstring("return " .. table)() .. [[)
+    ]])()
+end
+
+    local function serializeTable(val)
+        local t = type(val)
+        if t == "table" then
+            local tmp = {}
+            local is_list = #val > 0 and (function()
+                local count = 0
+                for _ in pairs(val) do count = count + 1 end
+                return count == #val
+            end)()
+            
+            for k, v in pairs(val) do
+                local key = is_list and "" or "[" .. (type(k) == "number" and k or '"' .. k .. '"') .. "]="
+                table.insert(tmp, key .. serializeTable(v))
+            end
+            return "{" .. table.concat(tmp, ",") .. "}"
+        elseif t == "string" then return string.format("%q", val)
+        end
+        return tostring(val)
+    end
+
+    ui.new_button("LUA", "B", "Export config", function()
+        local idx = ui.get(cfg_list)
+        if idx == nil or ps_cfg_list[idx + 1] == nil then
+            client.log("[PasteSense] Select a config!")
+            return
+        end
+        
+        local name = ps_cfg_list[idx + 1]
+        local data = database.read("ps_cfg_" .. name)
+        
+        if data then
+            local str = serializeTable(data)
+            clipboard.set(str)
+            client.log("[PasteSense] Config '" .. name .. "' exported to clipboard!")
+        else
+            client.log("[PasteSense] Failed to read config data!")
+        end
+    end)
+
+    ui.new_button("LUA", "B", "Import config", function()
+        local buffer = clipboard.get()
+        
+        if not buffer or buffer == "" then
+            client.log("[PasteSense] Clipboard is empty!")
+            return
+        end
+
+        local status, func = pcall(load, "return " .. buffer)
+        
+        if status and type(func) == "function" then
+            local ok, result = pcall(func)
+            if ok and type(result) == "table" then
+                apply(result)
+                client.log("[PasteSense] Config imported successfully!")
+            else
+                client.log("[PasteSense] Invalid config data structure!")
+            end
+        else
+            client.log("[PasteSense] Error decoding config from clipboard!")
+        end
+    end)
+
+
+end
+-- Config System
