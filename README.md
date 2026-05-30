@@ -1,2 +1,2 @@
 # sn1per-s-gamesense-config
-This is my gamesense/skeet config and luas for csgo, and btw yes sn1per is me.
+This is a version 1 of my gamesense/skeet config (I also have the luas I use in there)
